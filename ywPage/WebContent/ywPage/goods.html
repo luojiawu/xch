@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" /><title>商品详情</title>
+<link rel="stylesheet" href="../css/mui.min.css"/>
+<link rel="stylesheet" href="../css/swiper.min.css">
+<link rel="stylesheet" href="../css/goods.css">
+<script src="../js/jquery-3.41.min.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/swiper.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/goods.js"></script>
+
+
+</head>
+<body>  
+	<div class="header">
+  			<div class="banner">
+  				<div class="swiper-container" id="banner1">
+			        <div class="swiper-wrapper">
+			        	
+			        	
+			            
+			        </div>
+			        <!-- Add Pagination -->
+			        <div class="swiper-pagination swiper-pagination-white"></div>
+		        
+		    	</div>
+  			</div>
+  			
+		<div class="goodsIntro">
+			<!-- <span style="color: #ff1e1e">￥<font style="font-size: 5vw">${goods.goodsPrice}</font></span>起<br>
+			<span style="font-size: 5vw">${goods.goodsName}</span> -->
+		</div>
+  		</div>
+	<div class="materials" id="materials">
+		已选&nbsp<span style="color: #ff1e1e;"></span>
+	</div>
+	<div class="goodsDetails">
+		<div>商品详情</div>
+		
+		
+		
+	</div>
+	<div class="footer">
+		<button id="toPhotoPage">开始定制</button>
+	</div>
+  		
+  		<!--默认隐藏 -->
+	<div id="typeBackground"> 
+		<div class="blankDiv" id="blankDiv"></div>
+		<div class="typeDiv">
+			<div class="typeHeader">
+				<div class="typeHeaderLeft">
+					<!-- <img alt="" src="${ctx}/${goods.typeList[0].mainImgs[0]}"> -->
+					<img alt="" src="">
+					<div>选择纸张</div>
+				</div>
+				<div class="typeHeaderRight"></div>
+			</div> 
+			<div class="typeCentent" id="typeCentent">
+				
+				<div class="swiper-container" id="banner2">
+					<div class="swiper-wrapper">
+						
+						
+						
+						
+					</div>
+				</div>
+				
+				
+				
+			</div>
+			<div class="payNumDiv">
+				<div>购买数量</div>
+				<div class="payNum">
+					<span class="cutSpan" id="cutSpan">-</span>
+					<span style="width: 8vw;" class="numSpan" id="numSpan">1</span>
+					<span class="addSpan" id="addSpan">+</span>
+				</div>
+			</div>
+			<div class="typeBtn" id="typeBtn">确定</div>
+		</div>
+	</div>
+</body>
+</html>

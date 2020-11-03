@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+<title>订单列表</title>
+<link rel="stylesheet" href="../css/mui.min.css"/>
+<link rel="stylesheet" href="../css/orderList.css"/>
+<link rel="stylesheet" type="text/css" href="../css/checkbox.css" />
+<script src="../js/jquery.js"></script>
+<script src="../js/mui.min.js"></script>
+<script src="../js/util.js"></script>
+<script src="../js/orderList.js"></script>
+
+
+</head>
+
+<body>
+	
+
+    	<div class="content">
+    		<!-- <#list orderList as order>
+    		<div class="orderDiv">
+    			<div class="orderContent">
+    				<div class="dateDiv">${order.orderTime?substring(0,10)} 
+    				<#if order.status == 2>
+    					<span>已发货</span>
+    				<#elseif order.status == 1>
+    					<span>已付款</span>
+    				<#elseif order.status == 0>
+    					<span>待付款</span>
+    				<#elseif order.status == -1>
+    					<span>交易关闭</span>	
+    				</#if>
+    				</div>
+    				<div class="orderDetails" onclick="toOrderDetails('${order.orderId}')">
+    					<div id="imgDiv" >
+    						<img id="img_id" class="img_id" alt="" src="../../${order.firstPhoto}">
+    					</div>
+    					<div class="leftDetails">
+    						<span style="color: black;font-size: 4vw">${order.goods.goodsName}</span><br>
+    						<span style="font-size: 3vw">数量：${order.photoNum}张;尺寸：${order.type.typeSize}</span>
+    					</div>
+    					<div class="rightDetails">
+    						X 1
+    					</div>
+    					
+    				</div>
+    				<div class="moneyDiv">
+    					<#if order.payMoney == 0>
+	    					<font style="color: black;">合计：￥${order.money*order.goodsNum+order.goods.postage}元</font>
+	    				<#else>
+	    					<font style="color: black;">合计：￥${order.payMoney}元</font>
+	    				</#if>
+    					
+    				</div>
+    			</div>
+    			<#if order.status == 1>
+    				<span>订单完成</span>
+   				<#elseif order.status == 0>
+   					
+   					<span style="background-color: #bbe3f5;
+    color: #1994f7;" onclick="toOrder('${order.orderId}')">去付款</span>
+   					<span onclick="delOrder('${order.orderId}')">删除订单</span>
+   				<#else>
+   					<span onclick="delOrder('${order.orderId}')">删除订单</span>
+   				</#if>
+    			
+    		</div>
+    		</#list> -->
+    	</div>
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+
+</body>
+</html>
+
+

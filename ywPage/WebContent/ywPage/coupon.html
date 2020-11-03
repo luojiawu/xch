@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" /> -->
+		<title>优惠券</title>
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" /><meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" type="text/css" href="../css/allReset.css" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/coupon.css" />
+		<style type="text/css">
+			* { touch-action: pan-y; }
+			.mui-control-content {
+				height: 90vh;
+			}
+			/* #scroll1{
+				top: 4rem;
+			} */
+		</style>
+	</head>
+	<body>
+		<div class="mui-content">
+			<div style="padding: 10px 10px;background-color: #FFFFFF;">
+				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<!-- <a class="mui-control-item mui-active" href="#item1">可使用</a>
+					<a class="mui-control-item" href="#item2">已使用</a>
+					<a class="mui-control-item" href="#item3">已过期</a> -->
+				</div>
+			</div>
+			<!-- <div id="item1" class="mui-slider-item mui-control-content mui-active">
+				兑换栏
+				<div class="my-search-bar">
+					<div class="mui-input-row mui-search" style="margin-bottom: 10px;">
+						<input type="search" class="mui-input-clear" placeholder="请输入兑换码">
+					</div>
+				</div>
+				<div id="scroll1" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="coupon list-width" style="margin-top: 10px;">
+							<div class="coupon-left not-expired">
+								<p class="money-1"><span class="money-2">&yen;</span>8</p>
+								<p class="money-2">满50可用</p>
+							</div>
+							<div class="coupon-right">
+								<div class="coupon-right-info">
+									<div class="top">
+										<p>有效期</p>
+										<div class="button">
+											去使用
+										</div>
+									</div>
+									<div class="bottom">
+										2020.03.06-2020.03.31
+									</div>
+								</div>
+								<div class="coupon-right-kind">
+									不限商品
+								</div>
+							</div>
+							<i class="coupon-circle cc-left"></i>
+							<i class="coupon-circle cc-right"></i>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- 已使用 -->
+			<!-- <div id="item2" class="mui-slider-item mui-control-content">
+				<div id="scroll2" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+						<div class="coupon list-width" style="margin-top: 10px;">
+							<div class="coupon-left used">
+								<p class="money-1"><span class="money-2">&yen;</span>8</p>
+								<p class="money-2">满50可用</p>
+							</div>
+							<div class="coupon-right">
+								<div class="coupon-right-info">
+									<div class="top">
+										<p>有效期</p>
+									</div>
+									<div class="bottom">
+										2020.03.06-2020.03.31
+									</div>
+								</div>
+								<div class="coupon-right-kind">
+									不限商品
+								</div>
+							</div>
+							<i class="coupon-circle cc-left"></i>
+							<i class="coupon-circle cc-right"></i>
+						</div>
+					</div>
+				</div>
+			</div> -->
+			<!-- 已过期 -->
+			<!-- <div id="item3" class="mui-slider-item mui-control-content">
+				<div id="scroll3" class="mui-scroll-wrapper">
+					<div class="mui-scroll">
+							<div class="coupon list-width" style="margin-top: 10px;">
+								<div class="coupon-left expire">
+									<p class="money-1"><span class="money-2">&yen;</span>8</p>
+									<p class="money-2">满50可用</p>
+								</div>
+								<div class="coupon-right">
+									<div class="coupon-right-info">
+										<div class="top">
+											<p>有效期</p>
+							
+										</div>
+										<div class="bottom">
+											2020.03.06-2020.03.31
+										</div>
+									</div>
+									<div class="coupon-right-kind">
+										不限商品
+									</div>
+								</div>
+								<i class="coupon-circle cc-left"></i>
+								<i class="coupon-circle cc-right"></i>
+							</div>
+					</div>
+				</div>
+				
+			</div> -->
+		</div>
+		<script src="../js/jquery-3.41.min.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<!-- <script>
+			mui.init({
+				swipeBack: true //启用右滑关闭功能
+			});
+			(function($) {
+				$('#scroll1').scroll({
+					indicators: true //是否显示滚动条
+				});
+				$('#scroll2').scroll({
+					indicators: true //是否显示滚动条
+				});
+				$('#scroll3').scroll({
+					indicators: true //是否显示滚动条
+				});
+				var segmentedControl = document.getElementById('segmentedControl');
+			})(mui);
+		</script> -->
+		<script src="../js/util.js"></script>
+		<script src="../js/coupon.js"></script>
+	</body>
+</html>

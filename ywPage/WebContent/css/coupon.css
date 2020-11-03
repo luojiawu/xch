@@ -1,0 +1,154 @@
+
+.list-width {
+	margin: 0 2vw;
+}
+
+.makeItGray {
+	background-color: #F0EFF5;
+}
+
+.the-top {
+	position: fixed;
+	top: 0;
+	z-index: 999;
+	width: 100vw;
+	background-color: #FFFFFF;
+}
+
+.my-search-bar{
+	height: 4rem;
+	padding: 0.5rem 0.5rem;
+	background-color: #fff;
+	/* margin-bottom: 5rem; */
+}
+
+/* .my-tab {
+	height: 46px;
+	line-height: 46px;
+
+	font-weight: 700;
+	text-align: center;
+	width: 20%;
+	border-bottom: 2px solid #F7F8F9;
+} */
+
+/* .search-bar {
+	display: flex;
+	justify-content: flex-start;
+	background-color: #FFFFFF;
+} */
+
+.coupon {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 96vw;
+	height: 10rem;
+	/* border: #000000 solid 1px; */
+}
+
+.coupon-left {
+	width: 10rem;
+	text-align: center;
+	padding: 2.5rem 0;
+}
+
+.not-expired {
+	background-color: #3388FF;
+}
+
+.used {
+	background-color: rgba(51, 136, 255, 0.5);
+}
+
+.expire {
+	background-color: #9E9E9E;
+}
+
+
+.coupon-left p,
+span {
+	color: #FFFFFF;
+}
+
+.coupon-left .money-1 {
+	font-size: 3rem;
+	font-weight: 600;
+}
+
+.coupon-left .money-2 {
+	font-size: 1rem;
+}
+
+.coupon-right {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	background-color: #FFFFFF;
+	color: #000000;
+	padding: 1.5rem 1rem;
+}
+
+.coupon-right-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.coupon-right-info .top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.coupon-right-info .top .button {
+	border-radius: 98rem;
+	border: #3388FF 0.4rem solid;
+	background-color: #3388FF;
+	color: #FFFFFF;
+	padding: 0 0.3rem;
+	font-size: 0.8rem;
+	height: 2rem;
+	line-height: 1.2rem;
+}
+
+
+.coupon-right-info .bottom {
+	font-size: 1rem;
+	color: #999999;
+}
+
+.coupon-right-kind {
+	margin-top: 1rem;
+	border-top: #C8C7CD 0.1rem dashed;
+	padding-top: 1rem;
+	font-size: 1rem;
+}
+
+.coupon-circle {
+	display: inline-block;
+	width: 1.5rem;
+	height: 1.5rem;
+	background: #F0EFF5;
+	position: absolute;
+	top: 4.25rem;
+	border-radius: 50%
+}
+
+.cc-left {
+	left: -0.75rem;
+}
+
+.cc-right {
+	right: -0.75rem;
+}
+
+/* .mask{
+
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  background: rgba(0, 0, 0, .5);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#88000000,endColorstr=#88000000);
+
+} */

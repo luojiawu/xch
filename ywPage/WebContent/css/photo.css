@@ -1,0 +1,128 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+body{
+	background-color: #000000;
+}
+.title{
+    color: #7a7a7a;
+    text-align: center;
+    line-height: 16vw;
+}
+
+
+.photoList{
+	display: flex;
+	flex-wrap: wrap;
+	margin-bottom: 20vw;
+}
+.footer{
+    height: 12vw;
+    width: 100vw;
+    line-height: 12vw;
+    background-color: #ffffff;
+    font-size: 4vw;
+    position: fixed;
+    bottom: 0;
+    padding: 0 5vw;
+}
+.footer img{
+	width: 6vw;
+	vertical-align: sub;
+}
+.footer button{
+    background-color: #398bf1;
+    color: white;
+    width: 14vw;
+    height: 8vw;
+    border: none;
+    line-height: 8vw;
+    border-radius: 5vw;
+}
+
+.photoList .img-box{
+    
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    left: 0;
+    
+}
+.photoList .img-box .new-img{
+	
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.photoList .img-box .new-img div{
+	background-color:white;
+	height: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.photoList .img-box span{
+	color: white;
+    font-size: 4vw;
+    width: 10vw;
+    position: absolute;
+    bottom: 0px;
+    right: 3vw;
+    text-align: center;
+}
+
+.photoList .img-box .numSpan{
+	background-color: white;
+    height: 6vw;
+    top: 0vw;
+    color: black;
+    text-align: center;
+    width: 7vw;
+    border-radius: 4vw;
+}
+
+.progressDiv{
+	height: 12vw;
+    width: 100vw;
+    background-color: #ffffff;
+    position: fixed;
+    bottom: 0;
+    /* display: none; */
+}
+.progressDiv .progressSpan{
+    height: 6vw;
+    font-size: 3vw;
+    line-height: 6vw;
+    text-align: center;
+    color: #2196F3;
+}
+#progress 
+{
+ background:white;
+ height:6vw;
+ padding:2px;
+ border:1px solid #2196F3;
+ margin:2px;
+ 
+}
+#progress span 
+{
+ background:#2196F3;
+ height:16px;
+ text-align:center;
+ display:block;
+ color:white;
+ font-weight:bold;
+ font-size:14px;
+ width:0%;
+}

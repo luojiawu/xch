@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>蒲公英电商晚报${newDate.day}</title>
+<script src="${ctx}/js/jquery.js"></script>
+			 
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js "></script>
+
+<style type="text/css">
+body{
+	background-color: ${map.color};
+	}
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+.header{
+    margin: 8vw 5vw;
+    font-size: 6vw;
+    color: #3798ff;
+    font-weight: bold;
+}
+.header img{
+	width: 10vw;
+    vertical-align: middle;	
+}
+.middle{
+	height: 8vw;
+	margin: 5vw;
+    line-height: 8vw;
+}
+.middle .user{
+	float: left;
+}
+.middle .user img{
+	width: 8vw;
+	border-radius: 5vw;
+    vertical-align: top;
+}
+.middle .hello{
+	float: right;
+    border: 1px solid black;
+    width: 80px;
+    text-align: center;
+}
+.newDate{
+    display: inline-block;
+    width: 50vw;
+    margin-left: 5vw;
+    height: 24vw;
+    font-size: 4vw;
+}    
+.newDate div{
+	margin-bottom: 2vw;
+}
+.newDate .line{
+	border-bottom: 1px solid black;
+    width: 20vw;
+}
+.content{
+	margin-left: 5vw;
+	margin-bottom: 25vw;
+}   
+.content .title{
+	font-size: 6vw;
+}
+.content .title font {
+	color: red;
+	font-size: 7vw;
+	margin: 0 2vw;
+}
+.content p{
+	width: 90vw;
+    margin-top: 2vw;
+    font-size: 4vw;
+}
+
+.shareBtn{
+    margin: 5vw;
+    width: 90vw;
+    text-align: center;
+    font-size: 6vw;
+    background-color: #ff4701;
+    height: 14vw;
+    border-radius: 2vw;
+    color: #ffe9db;
+    line-height: 14vw;
+    position: fixed;
+    bottom: 2vw;
+}
+.colorDiv{
+    width: 60vw;
+    font-size: 3vw;
+    margin: 8vw 5vw 2vw;
+}
+.colorDiv div{
+	display: inline-block;
+    width: 3vw;
+    height: 3vw;
+    margin: 2px;
+    border: 1px solid #000000;
+    border-radius: 5vw;
+}
+
+#hideBackground{display:none;background-color: rgba(0, 0, 0, 0.42);width: 100vw;height: 100vh;position:fixed;top:0;z-index: 9999;}
+#hideBackground .blankDiv{
+	height: 18vh;
+}
+#hideBackground .blankDiv img{
+    width: 6vw;
+    margin-top: 12vh;
+    margin-left: 84vw;
+}
+#hideBackground .hideDiv{
+	background-color: white;
+    padding: 8vw 0;
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 2vw;
+    text-align: center;
+}
+#hideBackground .hideDiv div{
+	font-size: 6vw;
+    padding-bottom: 2vw;
+    color: #F44336;
+}
+
+#hideBackground .hideDiv div>img{
+	width: 8vw;
+    margin-right: 2vw;
+}
+
+#hideBackground .hideDiv>img{
+	width: 70vw;
+}
+
+
+</style>
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body>  
+	<div class="header">
+		<img src="${ctx}/img/ywIcon.jpg"> 蒲公英电商晚报
+	</div>
+	<div class="middle">
+		<div class="user">
+			<img alt="" src="${map.headimgurl}">
+			${map.nickname}
+		</div>
+		<div class="hello">
+			${newDate.helloSpan}
+		</div>
+	</div>
+	<div class="newDate">
+		<div>${newDate.day}</div>
+		<div style="font-size: 3vw">${newDate.lunar}</div>
+		<div class="line"></div>
+		<div style="font-size: 3vw">${newDate.week}</div>
+	</div>
+	<div class="content">
+		<div class="title">
+			成为更好的自己，第<font>${numberDay}</font>天
+		</div>
+		<p>
+			${map.content}
+		</p>
+	</div>
+	<#if type != "1">
+	  <div class="shareBtn" id="shareBtn">
+			免费换成我的晚报
+	  </div>
+	<#else>  
+	  <div class="colorDiv" id="colorBtn">
+	  		更换背景<br>
+			<div style="background-color: white;"><input type="hidden" value="white"></div>
+			<div style="background-color: #9E9E9E;"><input type="hidden" value="#9E9E9E"></div>
+			<div style="background-color: #fd786e;"><input type="hidden" value="#fd786e"></div>
+		  	<div style="background-color: #01594b;"><input type="hidden" value="#01594b"></div>
+		  	<div style="background-color: #fff1d9;"><input type="hidden" value="#fff1d9"></div>
+		  	<div style="background-color: #ffe9e5;"><input type="hidden" value="#ffe9e5"></div>
+		  	<div style="background-color: #def2fa;"><input type="hidden" value="#def2fa"></div>
+		  
+	  
+	  </div>
+	</#if>
+	
+	<!--默认隐藏 -->
+	<div id="hideBackground"> 
+		<div class="blankDiv" id="blankDiv">
+		
+		</div>
+		<div class="hideDiv">
+			
+			<div><img alt="打钩" src="${ctx}/img/gou.png">更换成功</div>
+			<p>长按二维码 领取晚报</p>
+			<img alt="二维码" src="${ctx}/img/qrcode_for_gh_23ca2c79ca9d_258.jpg">
+		</div>
+		
+	</div>
+	
+
+<script>
+   
+   
+   function getJsSdkConfig(){
+		var lUrl = encodeURIComponent(window.location.href);
+		var wxData = {
+	        "imgUrl" : 'https://move.ehai.xyz/ywPositive/img/ywIcon.jpg', //分享图标
+	        "link"   : "",
+	        "title"  : '${map.Title}',
+	        "desc"   : '忆我'
+	    };
+		$.ajax({
+				type: "POST",
+		        url: "${ctx}/p/getJsSDK",
+		        data:"lUrl="+lUrl,
+		        async: false,
+		        dataType:"json",
+		        success: function (config) {
+		        	
+		        	if(config != null){
+		        		wx.config({
+		        	        debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		        	        appId : config.appId, // 必填，appID公众号的唯一标识
+		        	        timestamp : config.timestamp, // 必填，生成签名的时间戳
+		        	        nonceStr : config.nonceStr, // 必填，生成签名的随机串
+		        	        signature : config.signature,// 必填，签名，见附录1
+		        	        jsApiList: [
+		        	        	'onMenuShareTimeline',
+		        	        	'onMenuShareAppMessage'
+		        	        ]
+		        	    }); 
+		        	    
+		        	    wx.ready(function () {
+		        	    	
+		        	    	wx.onMenuShareTimeline({ 
+			        	        title: wxData.title, // 分享标题
+			        	        link: wxData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			        	        imgUrl: wxData.imgUrl, // 分享图标
+			        	        success: function () {
+			        	          
+			        	        }
+		        	        });
+		        	    	wx.onMenuShareAppMessage({
+		        	            title: wxData.title,
+		        	            desc: wxData.desc,
+		        	            link: wxData.link,
+		        	            imgUrl: wxData.imgUrl,
+		        	            type: 'link',
+		        	            dataUrl: '',
+		        	            success: function () {
+		        	            }
+		        	        });
+		        	    	
+		        	    });
+		        	    
+		        	    
+		        	    
+		        	}
+		        }	
+					
+			});  
+		
+	}
+   
+   function pushHistory(){
+       var state = {
+         title: "",
+         url: "#"
+       };
+       window.history.pushState(state, state.title, state.url);
+     }
+
+     function win_close(){
+       if (typeof WeixinJSBridge != "undefined") {
+         WeixinJSBridge.call("closeWindow");
+       } else {
+         if (navigator.userAgent.indexOf("MSIE") > 0) {
+           if (navigator.userAgent.indexOf("MSIE 6.0") > 0) {
+             window.opener = null;
+             window.close();
+           } else {
+             window.open("", "_top");
+             window.top.close();
+           }
+         } else if (navigator.userAgent.indexOf("Firefox") > 0) {
+           window.location.href = "about:blank ";
+         } else {
+           window.opener = null;
+           window.open("", "_self", "");
+           window.close();
+         }
+       }
+     }
+   
+   $(function(){
+	   
+	   getJsSdkConfig();
+	   
+	   pushHistory();
+	   var start = new Date();
+	   var end;
+	   var duration = 0;
+	   
+	   window.addEventListener("popstate", function(e) {
+           //do something
+           
+           if(${readId} != 0){
+        	   end = new Date();//用户退出时间
+    		   duration = end.getTime() - start.getTime();
+               duration = Math.ceil(duration/1000);//取的是秒
+                            
+               var data = {"readId":${readId},"readTime":duration};
+    	   		
+               $.ajax({
+                   type: "GET",
+                   url: "${ctx}/p/saveReadTime",
+                   data: data
+
+               });
+           }
+		   
+        },false);
+	   
+	   $("#hideBackground").on("click",function(){
+		 
+		   $(this).hide();
+		   
+	   })
+	   
+	   $("#shareBtn").on("click",function(){
+		   
+		   
+		   var data = {"openId":"${openId}","bindAnaId":${map.anaId},"templateId":${map.templateId},"bindOpenId":"${map.openId}"}
+		   
+		   $.ajax({
+				type: "POST",
+		        url: "${ctx}/e/toCopyEveningPager",
+		        data:data,
+		        async: false,
+		        dataType:"json",
+		        success: function (code) {
+		        	
+		        	if(code == "1"){
+		        		
+		        		$("#hideBackground").show();
+		        		
+		        	}else{
+		        		
+		        		alert("生成失败,请重试");
+		        	}
+		        	
+		        }	
+					
+			});  
+		   
+		   
+		   
+		   
+	   })
+	   
+	   $(".colorDiv div").on("click",function(){
+		   
+		   
+		   var color = $(this).find("input").val();
+		   var data = {"anaId":${map.anaId},"color":color}
+		   
+		   $.ajax({
+				type: "POST",
+		        url: "${ctx}/p/setColorByAnaId",
+		        data:data,
+		        async: false,
+		        dataType:"text",
+		        success: function (code) {
+		        	
+		        	if(code == "1"){
+		        		$("body").css("background-color",color);
+		        		
+		        		if("#f51504" == color){
+		        			$(".content .title font").css("color","black");
+		        		}else{
+		        			
+		        			$(".content .title font").css("color","red");
+		        		}
+		        		
+		        		//$("body").css("background-color",$(this).find("input").val());	
+		        	}else{
+		        		
+		        		alert("更换背景失败");
+		        	}
+		        	
+		        }	
+					
+			});  
+		   
+	   })
+	   
+	   
+	   
+   })
+   
+   
+</script>
+	
+	
+</body>
+</html>

@@ -1,0 +1,59 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.content>div{
+	background-color: white;
+    height: 14vw;
+    font-size: 4vw;
+    line-height: 14vw;
+    border-bottom: solid 1px #c3c3c3;
+    padding-left: 4vw;
+    overflow: hidden;
+}
+.content div input{
+	display: inline-block;
+	border-style:none;
+	font-size: 4vw;
+	width: 60vw;
+}
+.content div textarea{
+	border: none;
+	font-size:4vw;
+	resize : none;
+	vertical-align:text-top;
+	outline: none;
+	border-radius: 1vw;
+	width: 68vw;
+	padding-top: 0;
+}
+
+.content #checkbox>div{
+	display:inline-block;
+	float:right;
+	margin-right:4vw;
+	margin-top:2vw;
+}
+
+#addSite{
+	width: 90vw;
+    border: none;
+    height: 10vw;
+    color: white;
+    background-color: #2196F3;
+    border-radius: 1vw;
+    margin: 0 auto;
+    display: inherit;
+    font-size: 5vw;
+    margin-top: 6vw;
+}
+
+
+    

@@ -1,0 +1,68 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.content .siteDiv{
+	height: 28vw;
+    font-size: 4vw;
+    color: #b9b9b9;
+    margin-bottom: 2vw;
+    background-color: white;
+}
+.content .siteDiv>span{
+	float: right;
+    width: 18vw;
+    height: 10vw;
+    line-height: 10vw;
+}
+.content .siteDiv>span font{
+	margin-left: 2vw;
+}
+.content .siteDiv .siteContent{
+	border-bottom: solid 1px #dcdada; 
+    margin-left: 4vw;
+	height: 20vw;
+}
+.content .siteDiv .siteContent .checkboxDiv{
+	height: 16vw;
+	float: left;
+	width: 10vw;
+	line-height: 20vw;
+}
+.content .siteDiv .siteContent .siteRight{
+	float: left;
+    width: 86vw;
+}
+.content .siteDiv .siteContent .siteRight .siteContentTop{
+	line-height: 10vw;
+    height: 10vw;
+    color: black;
+}
+.content .siteDiv .siteContent .siteRight .siteContentBottom{
+    line-height: 10vw;	
+    height: 10vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 78vw;
+}
+
+.addSite{
+    position: fixed;
+    bottom: 0;
+    height: 16vw;
+    font-size: 6vw;
+    color: white;
+    line-height: 16vw;
+    text-align: center;
+    width: 100vw;
+    background-color: #2196F3;
+}
+    

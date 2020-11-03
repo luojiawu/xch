@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>文章预览</title>
+		<meta charset="utf-8">
+		<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" /><title></title>
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/swiper.min.css"/>
+		<link href="../css/review.css" rel="stylesheet" />
+		<style type="text/css">
+			
+			
+
+		</style>
+		
+	</head>
+	<body>
+		<div class="swiper-container" id="contentBox">
+		    <div class="swiper-wrapper">
+		        <!-- <div class="swiper-slide">
+					<div class="thePage">
+						
+					</div>
+				</div>
+		        <div class="swiper-slide">Slide 2</div>
+		        <div class="swiper-slide">Slide 3</div> -->
+		    </div>
+		    <!-- 如果需要分页器 -->
+		    <!-- <div class="swiper-pagination"></div>		    -->
+		</div>
+<!-- 		<div class="contentBox">
+			<div class="thePage">
+				<img src="./image/test.jpg" class="img1">
+				<p class="txt1">这里是标题</p>
+				<p class="txt2">作者</p>
+			</div>
+		</div>
+ -->
+		<nav class="mui-bar mui-bar-tab mytab">
+			<a class="mui-tab-item" style="color: #929292;" href="#popover1">
+				<span class="mui-icon mui-icon-compose"></span>
+				<span class="mui-tab-label">作品信息</span>
+			</a>
+			<a class="mui-tab-item" style="color: #929292;" href="#popover2">
+				<span class="mui-icon mui-icon-bars"></span>
+				<span class="mui-tab-label">模板</span>
+			</a>
+			<a class="mui-tab-item" style="color: #929292;">
+				<span class="mui-icon mui-icon-image"></span>
+				<span class="mui-tab-label">封面照片</span>
+			</a>
+			<a class="mui-tab-item" style="color: #929292;" href="#popover4">
+				<span class="mui-icon mui-icon-gear"></span>
+				<span class="mui-tab-label">字号设置</span>
+			</a>
+			<a class="mui-tab-item">
+				<!-- <button type="button" class="mui-btn mui-btn-blue">按钮</button> -->
+				<div class="checkBtn">
+					确定
+				</div>
+			</a>
+
+
+		</nav>
+
+		<div id="popover1" class="box mui-popover mui-popover-action mui-popover-bottom" style="display:inline-block;">
+			<div class="input-div" style="display: flex;flex-direction: column;width: 100%;padding: 0 20px 0 20px;">
+				<div class="p1_title">
+					<p>&nbsp;</p>
+					<p style="font-size: 6vw;color: #222222;">编辑作品信息</p>
+					<p>取消</p>
+				</div>
+				<div class="" style="width: 100%;">
+					<p>书标题</p>
+					<input type="text" name="" id="booktitle" value=" " class="mui-input-clear" style="background-color: #F2F2F2;border: 0px;" />
+				</div>
+				<div class="" style="width: 100%;">
+					<p>作者昵称</p>
+					<input type="text" name="" id="authorName" value=" " class="mui-input-clear" style="background-color: #F2F2F2;border: 0px;" />
+				</div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top: 10px;margin-bottom: 10px;">完成</button>
+			</div>
+		</div>
+		
+		<div id="popover2" class="box mui-popover mui-popover-action mui-popover-bottom" style="display:inline-block;">
+			<!-- <div class="input-div" style="display: flex;flex-direction: column;width: 100%;padding: 0 20px 0 20px;">
+				<div class="mui-scroll-wrapper">
+					<div class="mui-scroll" style="width: 100%;">
+
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+						<img src="image/test.jpg" style="width: 100px;height: 200px;">
+					</div>
+				</div>
+				<button type="button" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top: 10px;margin-bottom: 10px;">完成</button>
+			</div> -->
+			<div class="p1_title" style="">
+				<p>&nbsp;</p>
+				<p style="font-size: 6vw;color: #222222;">编辑模板</p>
+				<p><a href="#popover2">取消</a></p>
+			</div>
+			<div id="">
+				
+			
+				<div id="slider" class="mui-slider mui-fullscreen" style="margin-top: 60px;">
+					<div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted" style="height: 100%;border-radius: 0;">
+						<div class="mui-scroll" style="height: 100%;display: flex;" id="mouldScroll">
+							<!-- <div class="mui-active mymould" >
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+								<p>模板一</p>
+							</div>
+							<div class="mui-active mymould" >
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+								<p>模板一</p>
+							</div>
+							<div class="mui-active mymould" >
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+								<p>模板一</p>
+							</div>
+							<div class="mui-active mymould" >
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+								<p>模板一</p>
+							</div>
+							<div class="mui-active mymould" >
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+								<p>模板一</p>
+							</div> -->
+							<!-- <a class="mymould" href="#item2mobile">
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+							</a>
+							<a class="mymould" href="#item3mobile">
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+							</a>
+							<a class="mymould" href="#item4mobile">
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+							</a>
+							<a class="mymould" href="#item5mobile">
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+							</a>
+							<a class="mymould" href="#item6mobile">
+								<img src="image/test.jpg" style="width: 100px;height: 135px;">
+							</a> -->
+						</div>
+						
+						
+					</div>
+				</div>
+				
+				<div class="Changeit"  style="margin-top: 200px;height: 40px;display: flex;justify-content: space-between;align-items: center;">
+					<div class="mui-input-row mui-radio mui-left">
+						<label>使用内页模板</label>
+						<input name="radio1" type="radio">
+					</div>
+					<a style="margin-right: 20px;z-index: 999;" class="rightbtn">确定</a>
+				</div>
+	</div>
+			
+		</div>
+		
+
+		<div id="popover4" class="box mui-popover mui-popover-action mui-popover-bottom" style="display:inline-block;">
+			<div class="input-div" style="display: flex;flex-direction: column;width: 100%;padding: 0 20px 0 20px;">
+				<div class="" style="width: 100%;margin-top: 20px;">
+					<p style="font-size: large;">字号选择</p>
+					<form class="mui-input-group">
+						<div class="mui-input-row mui-radio mui-left">
+							<label>A标准</label>
+							<input type="radio" name="leibie" class="mui-radio"/>
+						</div>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>A加大</label>
+							<input type="radio" name="leibie" class="mui-radio"/>
+						</div>
+						<div class="mui-input-row mui-radio mui-left">
+							<label>A超大</label>
+							<input type="radio" name="leibie" class="mui-radio"/>
+						</div>
+						<button type="button" class="mui-btn mui-btn-primary mui-btn-block" style="margin-top: 10px;margin-bottom: 10px;">完成</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<!-- <div id="sheet1" class="mui-popover mui-popover-bottom mui-popover-action ">
+			<div class="mui-table-view">
+				<li class="mui-table-view-cell">
+				  编辑作品信息
+				</li>
+			</div>
+			<div class="mui-input-row mui-table-view">
+				<label>标题</label>
+				<input type="text" class="mui-input-clear" placeholder="请输入用户名">
+			</div>
+			<div class="mui-input-row mui-table-view">
+				<label>作者昵称</label>
+				<input type="password" class="mui-input-clear" placeholder="请输入密码">
+			</div>
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a href="#sheet1"><b>完成</b></a>
+				</li>
+			</ul>
+		</div> -->
+		<script src="../js/jquery.js"></script>
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/util.js"></script>
+		<script src="../js/review.js"></script>
+		
+		
+		
+	</body>
+</html>

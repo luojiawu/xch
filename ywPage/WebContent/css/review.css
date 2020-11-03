@@ -1,0 +1,127 @@
+
+* {
+	touch-action: none;
+}
+
+#popover1,
+/* #popover2, */
+#popover4{
+	width: 100vw;
+	/* height: 30vh; */
+	background-color: #fff;
+	/* border-radius: 20px 20px 0 0; */
+	align-items: center;
+	/* margin-top: 35px; */
+}
+
+#popover2{
+	width: 100vw;
+	height: 300px;
+	background-color: #fff;
+}
+
+
+
+.p1_title {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.radio_inline{
+                display: inline-block;
+                width: 65%;
+            }
+            .radio_inline label{
+
+                width: 20%;
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+            .radio_inline input[type=radio]{
+                width: 15%;             
+                right: auto;
+            }
+
+.moved{
+	width: 0px;
+	
+	/* width:5px; */
+	/* height:100px; */
+	/* background:blue; */
+	
+
+}
+
+.mymould{
+	margin-left: 20px;
+	width: 102px;
+	height: 162px;
+}
+
+/* .swiper-container {
+    width: 600px;
+    height: 300px;
+} */
+#contentBox {
+	width: 100vw;
+	height: 80vh;
+	/* display: flex; */
+	/* align-items: center; */
+	/* justify-content: center; */
+	margin-top: 20vw;
+}
+
+.thePage {
+	margin-left: 5vw;
+	width: 90vw;
+	height: 126vw;
+	/* background-color: #FFFFFF; */
+	/* box-shadow: 2px 2px 2px #6D6D72; */
+	position: relative;
+	display: inline-block;
+	transition:width 0.8s;
+	
+	-webkit-transition:width 0.8s; /* Safari and Chrome */
+}
+
+.img1{
+	/* object-fit: cover; */
+	/* width: 80%; */
+	position: absolute;
+	    left: 7.8%;
+	    top: 5.3%;
+	    width: 80%;
+	    height: 28.0%;
+}
+
+.txt1{
+	position: absolute;
+	left: 7.8%;
+	top: 45%;
+	font-size: 8vw;
+}
+
+.txt2{
+	position: absolute;
+	left: 7.8%;
+	top: 53%;
+	font-size: 4vw;
+	color: #000000;
+}
+
+.checkBtn {
+	border-radius: 98px;
+	border: #007AFF solid 1px;
+	margin-right: 10px;
+	background-color: #007AFF;
+	color: #fff;
+	height: 30px;
+	padding: 5px 5px;
+}
+
+.chooseMould{
+	box-sizing: border-box;
+	border: 1px solid #ff8711;
+}

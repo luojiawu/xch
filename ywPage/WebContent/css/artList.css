@@ -1,0 +1,77 @@
+.html{font-size:62.5%;} 
+body{font-size:12px;font-size:1.2rem ;font-family: tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;} 
+p{font-size:14px;font-size:1.4rem;}
+.my-media-img{
+	width: 5rem;
+	height: 5rem;
+	border-radius: 10px;
+	margin-right: 1rem;
+	color: #777777;
+}
+
+.my-media-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 5rem;
+}
+
+.my-content-p{
+	white-space:normal;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+.my-media-price{
+	color: #B6B6B6;
+	font-size: 1rem;
+}
+
+.li-first{
+	width: 2rem;margin-right: 10px;align-items: center;
+}
+
+.theIndex{
+	width: 2rem;height: 2rem;border: #000000 1px solid;border-radius: 98px;margin-top: 1.5rem;
+}
+/* .my-media-price span{
+	font-size: 1rem;
+} */
+.theIndexColor{
+	background-color: #007AFF;width: 100%;height: 100%;border-radius: 98px;color: #FFFFFF;padding:0.3rem 0.6rem;
+}
+
+.theIndexColor p{
+	color: #FFFFFF;
+}
+
+.my-disabled{
+	display: none;
+}
+
+.checkBtn {
+	
+	border-radius: 5vw;
+	border: #007AFF solid 1px;
+	/* margin-right: 10px; */
+	background-color: #007AFF;
+	color: #fff;
+	height: 30px;
+	padding: 5px 15px 5px 15px;
+}
+
+.my-mark{
+    position:fixed;
+    left:0;
+    top:0;
+    opacity:.5;
+    width:100%;
+    height:100%;
+    background:#000;
+    z-index:998;
+    pointer-events: none; //不能操作
+}
+
+.selectLi{
+	display: flex;justify-content: space-between;
+}

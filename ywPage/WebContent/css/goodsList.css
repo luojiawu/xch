@@ -1,0 +1,28 @@
+.my-media-img{
+	width: 10rem;
+	height: 10rem;
+	border-radius: 10px;
+	margin-right: 1rem;
+}
+
+.my-media-content{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 10rem;
+}
+
+.my-content-p{
+	white-space:normal;
+	word-break:break-all;
+	word-wrap:break-word;
+}
+
+.my-media-price{
+	color: coral;
+	font-size: 2rem;
+}
+
+.my-media-price span{
+	font-size: 1rem;
+}

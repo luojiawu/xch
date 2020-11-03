@@ -1,0 +1,137 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.orderStatus{
+    background-color: white;
+    
+}
+.orderStatus .orderStatusTop{
+    height: 20vw;
+    background-color: #3898fc;
+    color: white;
+    padding-left: 4vw;
+    padding-top: 8vw;
+    padding-right:4vw;
+    line-height: 4vw;
+}
+.orderStatus .orderStatusBottom{
+	padding-left: 4vw;
+    padding-top: 4vw;
+    font-size: 4vw;
+    line-height: 6vw;
+    padding-bottom: 2vw;
+}
+.orderStatus .orderStatusBottom .orderStatusMan{
+	color: #545456;
+}
+.orderStatus .orderStatusBottom .orderStatusSite{
+	color: #b1afb2;
+}
+
+.orderInfo{
+    background-color: white;
+    margin-top: 2vw;
+    color:#3f3f40;
+}
+.orderInfo .orderInfoTop{
+	margin-left: 4vw;
+    padding-top: 4vw;
+    border-bottom: 1px solid #eaeaec;
+    font-size: 4vw;
+    height: 34vw;
+}
+.orderInfo .orderInfoTop .imgDiv{
+	width: 30vw;
+	height: 20vw;
+	overflow:hidden;
+	display: inline-block;
+	text-align: center;
+	
+}
+.orderInfo .orderInfoTop .imgDiv .img_id{
+	position: relative;
+}
+.orderInfo .orderInfoTop .orderInfoGoods{
+    display: inline-block;
+    width: 42vw;
+    float: right;
+    line-height: 6vw;
+}
+.orderInfo .orderInfoTop .orderInfoPrice{
+	display: inline-block;
+    width: 18vw;
+    float: right;
+    line-height: 6vw;
+    text-align: right;
+    padding-right: 4vw;
+}
+.orderInfo .orderInfoMiddle{
+	margin-left: 4vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    border-bottom: 1px solid #eaeaec;
+    font-size: 4vw;
+}
+.orderInfo .orderInfoMiddle div{
+	height: 5vw;
+	line-height: 5vw;
+}
+.orderInfo .orderInfoBottom{
+    margin-left: 4vw;
+    padding-top: 4vw;
+    padding-bottom: 6vw;
+    font-size: 5vw;
+}
+
+.orderTime{
+    background-color: white;
+    margin-top: 2vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    color: #b1afb2;
+    font-size: 4vw;
+}
+.orderTime div{
+    margin-left: 4vw;
+    height: 6vw;
+    line-height: 6vw;
+}
+.footer{
+    height: 16vw;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #9E9E9E;
+    background-color: white;
+}
+.footer span{
+	width: 24vw;
+    height: 8vw;
+    line-height: 8vw;
+    font-size: 4vw;
+    border: none;
+    border-radius: 4vw;
+    margin-top: 2vw;
+    text-align: center;
+}
+.footer .delOrder{
+	background-color: #eff3f6;
+    color: #878789;
+    float: right;
+    margin-right: 2vw;
+}
+.footer .toPay{
+	background-color: #2196F3;
+    color: white;
+    float: right;
+    margin-right: 6vw;
+    
+}

@@ -1,0 +1,120 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	line-height:none;
+	background-color: #f7f7f7;
+}
+.goodsDiv{
+	width: 100%;
+	margin-bottom: 2vw;
+	
+}
+
+.goodsDiv .goodsType{
+	width: 92vw;
+    height: 8vw;
+    font-size: 5vw;
+    color: #2a585b;
+    line-height: 8vw;
+    margin: 3vw 4vw;
+    text-align: center;
+    font-weight: bold;
+}
+.goodsDiv .goodsType img{
+	width: 5vw;
+}
+.goodsDiv .goodsEntityDiv{
+	width: 94vw;
+	margin: 0 auto;
+}
+
+.goodsDiv .goodsEntity{
+    width: 45vw;
+    font-size: 2vw;
+    display: inline-block;
+    background-color: white;
+    text-align: center;
+    box-shadow: 0px 0px 1px #c5ccd0;
+    border-radius: 1vw;
+    height: 52vw;
+    margin: 1vw 1vw;
+}
+.goodsDiv .goodsEntity img{
+	width: 38vw;
+    height: 32vw;
+    margin-top: 2vw;
+}
+.goodsDiv .goodsEntity div{
+	display:inline-block;
+	width: 38vw;
+	margin: 0 auto;
+	text-align: left;
+}
+.goodsDiv .goodsEntity .goodsPrice{
+	color:#e36a4e;
+} 
+.goodsDiv .goodsEntity .goodsPrice span{
+	font-size: 4vw;
+	font-weight: bold;
+} 
+.goodsDiv .goodsEntity .goodsName{
+	font-weight: bold;
+    margin-top: 2vw;
+    font-size: 3vw;
+} 
+.goodsDiv .goodsEntity .goodsTitle{
+	color: #b8b9b4;
+}	
+
+.explain{
+	margin-top: 4vw;
+    margin-bottom: 16vw;
+}
+
+.classify{
+	position: fixed;
+    bottom: 20vw;
+    width: 20vw;
+    left: 7vw;
+	display: none;
+}
+.classify div{
+    display: inline-block;
+    font-size: 4vw;
+    background-color: white;
+    width: 20vw;
+    text-align: center;
+    height: 10vw;
+    line-height: 10vw;
+    border-radius: 2vw;
+    float: left;
+} 
+.classify img{
+    width: 5vw;
+    position: absolute;
+    bottom: -3vw;
+    left: 7vw;
+	
+}
+.footer{
+    width: 100vw;
+    height: 16vw;
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+}
+.footer>span{
+	width: 33vw;
+    text-align: center;
+    text-indent: 1vw;
+    margin-top: 2vw;      
+    float: left;                                                                                                                                        
+}
+.footer>span font{
+	margin-left: 2vw;
+}

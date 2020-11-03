@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>设置中心</title>
+<script src="${ctx}/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/checkbox.css?a=111" />			 
+
+
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #fff5f2;
+}
+div>h4{
+    padding-bottom: 2vw;
+    border-bottom: 1px solid #F44336;
+    font-size: 6vw;
+    color: #434444;
+}
+
+.typeDiv{
+	margin:6vw 5vw;
+
+}
+.typeDiv .typeSpan{
+	display: inline-block;
+    width: 16vw;
+    height: 8vw;
+    line-height: 8vw;
+    color: #03A9F4;
+    border: 1px solid #9E9E9E;
+    background-color: #ffffff;
+    font-size: 4vw;
+    text-align: center;
+    border-radius: 1vw;
+    margin: 2vw;
+}
+.typeDiv .on{
+	color: #ffffff;
+	background-color: #03A9F4;
+}
+
+.timeDiv{
+	margin:6vw 5vw;
+}
+.timeDiv div{
+    height: 10vw;
+    line-height: 10vw;
+    font-size: 4vw;
+    color: #2196F3;
+}
+.clockInDiv{
+	margin:6vw 5vw;
+}
+.clockInDiv>div{
+	height: 10vw;
+    line-height: 10vw;
+    font-size: 4vw;
+    color: #2196F3;
+}
+.clockInDiv>div .clockInNum{
+	height: 8vw;
+    line-height: 8vw;
+    font-size: 4vw;
+    color: #FF5722;
+}
+.clockInDiv>div .clockInNum input{
+	outline: none;
+    width: 14vw;
+    float: right;
+    border: 1px solid #2196F3;
+    height: 7vw;
+    font-size: 5vw;
+    text-align: center;
+}
+
+</style>
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body>  
+	<div class="typeDiv">	
+		<h4>推荐分类</h4>
+		<#list map.artArray as artArray>
+			
+			<span class="typeSpan" value="0" id="type_${artArray.CID}"><input type="hidden" value="${artArray.CID}"/>${artArray.CName}</span>
+		</#list>
+		
+		
+	</div>
+	
+	<div class="timeDiv">
+		<h4>推送时间</h4>
+		<div>10点推送文章
+			<#if map.user.recommendTime_m == 1>
+				<input type="checkbox" id="checkbox_c1" value="1" class="chk_3" checked /><label for="checkbox_c1"></label>
+			<#else>
+				<input type="checkbox" id="checkbox_c1" value="0" class="chk_3"/><label for="checkbox_c1"></label>
+			</#if>
+			
+		</div>
+		<div>15点推送文章
+			<#if map.user.recommendTime_n == 1>
+				<input type="checkbox" id="checkbox_c2" value="1" class="chk_3" checked /><label for="checkbox_c2"></label>
+			<#else>
+				<input type="checkbox" id="checkbox_c2" value="0" class="chk_3"/><label for="checkbox_c2"></label>
+			</#if>
+		
+		</div>
+		<div>20点30分推送文章
+			<#if map.user.recommendTime_e == 1>
+				<input type="checkbox" id="checkbox_c3" value="1" class="chk_3" checked /><label for="checkbox_c3"></label>
+			<#else>
+				<input type="checkbox" id="checkbox_c3" value="0" class="chk_3"/><label for="checkbox_c3"></label>
+			</#if>
+		
+		</div>
+	</div>
+	
+	<div class="clockInDiv">
+		<h4>其他设置</h4>
+		<div>每日打卡(每天9点)
+			<#if map.user.clockIn == 1>
+				<input type="checkbox" id="checkbox_c4" value="1" class="chk_3" checked /><label for="checkbox_c4"></label>
+			<#else>
+				<input type="checkbox" id="checkbox_c4" value="0" class="chk_3"/><label for="checkbox_c4"></label>
+			</#if>
+		
+		</div>
+		
+		<div>电商晚报(每天17点45)
+			<#if map.user.eveningPager == 1>
+				<input type="checkbox" id="checkbox_c0" value="1" class="chk_3" checked /><label for="checkbox_c0"></label>
+			<#else>
+				<input type="checkbox" id="checkbox_c0" value="0" class="chk_3"/><label for="checkbox_c0"></label>
+			</#if>
+		
+		</div>
+		
+		
+		<div>文章被阅读时提醒我
+			<#if map.user.readNum &gt; 0>
+				<input type="checkbox" id="checkbox_c5" value="1" class="chk_3" checked /><label for="checkbox_c5"></label></div>
+				<div class="clockInNumDiv" style="margin-top: 4vw;">
+					<div class="clockInNum">文章被阅读提醒，按数值倍数(ps:10*1  10*2  10*3)<input id="score" type="number" class="mui-input-clear" value="${map.user.readNum}" οninput="value=value.replace(/[^\d]/g,'')"></div>
+				</div>
+			<#else>
+				<input type="checkbox" id="checkbox_c5" value="0" class="chk_3"/><label for="checkbox_c5"></label></div>
+				<div class="clockInNumDiv" style="margin-top: 4vw;display: none;">
+					<div class="clockInNum">文章被阅读提醒，按数值倍数(ps:10*1  10*2  10*3)<input id="score" type="number" class="mui-input-clear" value="1" οninput="value=value.replace(/[^\d]/g,'')"></div>
+				</div>
+			</#if>
+		
+	</div>
+	
+	
+<script>
+	
+	var recommend = ""; 
+	
+	function typeVal(){
+		
+		var str = "${map.user.recommend}".split(",");
+		for(var i=0;i<str.length;i++){
+		 	
+			if(str[i] != ""){
+				
+				$("#type_"+str[i]).attr("value","1");
+			    $("#type_"+str[i]).addClass("on");
+				
+			}
+			
+			
+			
+		}
+		
+		
+	}
+	
+	function userSet(){
+		
+		var openId = "${map.user.openId}";
+		recommend = "";
+		var recommendTime_m = $("#checkbox_c1").attr("value");
+		var recommendTime_n = $("#checkbox_c2").attr("value");
+		var recommendTime_e = $("#checkbox_c3").attr("value");
+		var clockIn = $("#checkbox_c4").attr("value");
+		var eveningPager = $("#checkbox_c0").attr("value");
+		var readNum = $("#checkbox_c5").attr("value")=="0"?0:$("#score").val(); 
+		$(".typeDiv .typeSpan").each(function(){
+			
+			if($(this).attr("value") == "1"){
+				
+				recommend += $(this).find("input").val()+",";
+				
+			}
+			
+	  	});
+		recommend = recommend.substr(0, recommend.length - 1);
+		
+		if(recommend == "" || recommend == null){
+			
+			recommendTime_m = 0;
+			recommendTime_n = 0;
+			recommendTime_e = 0;
+			
+			$("#checkbox_c1").attr("value","0");
+			$("#checkbox_c2").attr("value","0");
+			$("#checkbox_c3").attr("value","0");
+			$("#checkbox_c1").prop("checked", false);
+			$("#checkbox_c2").prop("checked", false);
+			$("#checkbox_c2").prop("checked", false);
+			
+		}
+		
+		var data = {"openId":openId,"recommend":recommend,"recommendTime_m":recommendTime_m,"recommendTime_n":recommendTime_n,"recommendTime_e":recommendTime_e,"clockIn":clockIn,"eveningPager":eveningPager,"readNum":readNum,};
+		$.ajax({
+			type: "POST",
+	        url: "${ctx}/p/saveUserSet",
+	        data:data,
+	        async: false
+		  });
+		
+		//alert(",recommend-->"+recommend+",recommendTime_m-->"+recommendTime_m+",recommendTime_n-->"+recommendTime_n+",recommendTime_e-->"+recommendTime_e+",clockIn-->"+clockIn+",read-->"+read);
+		
+		
+	}
+	
+	
+  $(function(){
+		
+	  typeVal();
+	  
+	  $("#checkbox_c5").on("click",function(){
+		  
+		  $(".clockInNumDiv").toggle(200);
+		  
+	  })
+	  
+	  $(".chk_3").on("click",function(){
+		  
+		  if($(this).attr("value") == "1"){
+			 
+			  $(this).attr("value","0");
+			  
+		  }else{
+			  
+			  $(this).attr("value","1");
+		  }
+		  userSet();
+		  
+	  })
+	  
+	  
+	  
+	  $(".typeDiv .typeSpan").on("click",function(){
+		  
+		  if($(this).attr("value") == "1"){
+			  $(this).attr("value","0");
+			  $(this).removeClass("on");
+			  
+		  }else{
+			  
+			  
+			//如果用户选择分类之前是没有分类的，则自动加中午时间的推送
+			  if(recommend == ""){
+				  
+				  $("#checkbox_c2").prop("checked", true);
+				  $("#checkbox_c2").attr("value","1");
+			  }
+			  
+			  
+			  $(this).attr("value","1");
+			  $(this).addClass("on");
+			  
+		  }
+		  userSet();
+		  
+	  })
+	  $("#score").on("blur",function(){
+		  
+		  userSet();
+		  
+	  })
+	  
+	  
+	  $(window).bind('beforeunload',function(){
+		  userSet();
+	  });
+	  
+  })
+
+  
+   
+   
+</script>
+	
+	
+</body>
+</html>

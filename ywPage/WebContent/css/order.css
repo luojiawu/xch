@@ -1,0 +1,207 @@
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: white;
+}
+.concealDiv{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.2);
+    display: none;
+} 
+.concealDiv .concealContent{
+    background-color: white;
+    width: 50vw;
+    height: 30vw;
+    margin: 0 auto;
+    border-radius: 2vw;
+    margin-top: 60vw;
+    padding-top: 6vw;
+    font-size: 6vw;
+    text-align: center;
+}
+.concealDiv .concealContent input{
+    width: 12vw;
+    border: none;
+    border-bottom: solid 1px #607D8B;
+    text-indent: 2vw;
+    font-size: 6vw;
+}
+.concealDiv .concealContent span{
+	display: inline-block;
+    width: 20vw;
+    height: 10vw;
+    line-height: 10vw;
+    margin-top: 6vw;
+    border-radius: 2vw;
+    color: white;
+}
+
+.header{
+	height: 24vw;
+    border-bottom: solid 4px #2196F3;
+    background-color: white;
+    
+}
+.header .userDiv{
+	width:94vw;
+	margin: 0 auto;
+	height: 10vw;
+    line-height: 10vw;
+    font-size: 4vw;
+    padding-top:2vw;
+}
+.header .userDiv .phone{
+	float: right;
+    margin-right: 6vw;
+}
+.header .addSite{
+	height: 24vw;
+    line-height: 24vw;
+    text-align: center;
+    font-size: 5vw;
+    color: #117dd4;
+}
+.header .siteDiv{
+	width:94vw;
+	margin: 0 auto;
+	font-size: 4vw;
+	color: #9E9E9E;
+    position: relative;
+} 
+.header .siteDiv .siteSpan{
+	float: left;
+    width: 90vw;
+}
+.header .siteDiv img{
+	width: 3vw;
+    position: absolute;
+    right: 1vw;
+    top: -2vw;
+}
+.content{
+	margin-bottom: 1vw;
+    border-top: 1vw solid #efecec;
+    border-bottom: 1vw solid #efecec;
+}
+.content div{
+	width: 94vw;
+	margin:0 auto;
+	 
+}
+.content .goodsDiv{
+	height: 30vw;
+    border-bottom: solid 1px #b1b0b0;
+    padding-top: 3vw;
+    font-size: 4vw;
+    color: #b9b9b9;
+    width: 97vw;
+    margin-left: 3vw;
+}
+.content .goodsDiv .goodsLeft{
+	float: left;
+    width: 25vw;
+    height: 18vw;
+	overflow:hidden;
+	display: inline-block;
+	text-align: center;
+    margin-right: 2vw;
+    margin-top: 2vw;
+}
+.content .goodsDiv .goodsLeft .img_id{
+	position: relative;
+}
+.content .goodsDiv .goodsLeft img{
+	width: 24vw;
+	margin-top: 3vw;
+}
+.content .goodsDiv .goodsRight{
+	float: left;
+	width: 60vw;
+	font-size: 4vw;
+}
+.content .goodsDiv .goodsRight .goodsName{
+	color: black;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 2vw;
+}
+.content .moneyDiv{
+	height: 20vw;
+    border-bottom: solid 1px #b1b0b0;
+    font-size: 4vw;
+    width: 97vw;
+    margin-left: 3vw;
+}
+.content .moneyDiv div{
+    height: 10vw;
+    line-height: 10vw;
+}
+.content .moneyDiv div .moneyLeft{
+	float: left;
+}
+.content .moneyDiv div .moneyLeft font{
+	color: #b9b9b9;
+}
+.content .moneyDiv div .moneyRight{
+	float: right;
+}
+.content .printingNum{
+	height:10vw; 
+    line-height: 10vw;
+    font-size: 4vw;
+    width: 97vw;
+}
+.content .printingNum .NumLeft{
+	float: left;
+	margin-left: 3vw;
+}
+.content .printingNum .NumRight{
+	float: right;
+}
+.couDiv{
+    line-height: 10vw;
+    height: 10vw;
+    padding-left: 4.5vw;
+    font-size: 4vw;
+    border-bottom: 1vw solid #efecec;
+}
+.postageDiv{
+    line-height: 10vw;
+    height: 10vw;
+    padding-left: 4.5vw;
+    font-size: 4vw;
+    border-bottom: 1vw solid #efecec;
+}
+.footer{
+    width: 100vw;
+    height: 16vw;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #9E9E9E;
+    background-color: white;
+    line-height: 10vw;
+}
+.footer span{
+	margin-left: 3vw;
+	vertical-align: sub;
+}
+.footer button{
+    width: 24vw;
+    height: 8vw;
+    background-color: #2196F3;
+    font-size: 4vw;
+    color: white;
+    float: right;
+    border: none;
+    border-radius: 4vw;
+    margin-top: 2vw;
+    margin-right: 6vw;
+}
+    

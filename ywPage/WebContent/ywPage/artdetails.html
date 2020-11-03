@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" /><title>详情页</title>
+<link href="../css/mui.min.css" rel="stylesheet" />
+<link href="../css/artDetails.css" rel="stylesheet" />
+			 
+
+<style type="text/css">
+</style>
+
+
+</head>
+<body>  
+	<div class="header">
+		<div class="userInfo">	
+			<!-- <img src="../img/icon.jpg" >
+			<div>忆我</div>
+			<div class="attention">关注</div>
+			<div class="title">城里的房子不能卖！卖了就赶紧赎回来！</div>
+			<div><span>2019-06-04</span><span>阅读20</span></div> -->
+		</div>
+	</div>
+	<!-- <div class="recommend">
+		<span><img alt="" src="../img/info.png"> 精华推荐</span>
+		<span style="color: #7499ac;float: right;margin-right: 4vw;">&gt;</span>
+	</div> -->
+	<div class="content">
+		
+		<!-- <div>
+			<p>      “人若卖城内的住宅，卖了以后，一年之内可以赎回；在一整年，必有赎回的权柄。 若在一整年之内不赎回，这城内的房屋就定准永归买主，世世代代为业；在禧年也不得出买主的手。 但房屋在无城墙的村庄里，要看如乡下的田地一样，可以赎回；到了禧年，都要出买主的手。  (利未记 25:29-31 和合本)</p>
+			<img src=""/>
+		</div>	
+		<div>
+			<p>      为甚么在所有的土地上面，所卖出的产业，顶多只能卖四十九年﹖，到了第五十年就无偿的归还，唯独在城里的房子，如果卖出去以后，一年不赎回来，这房子就不能再归还，就要永远归于那买的人和他的子孙。---      这是一个非常有意思的事，我们要看这一件事，我们必须从好几方面来看出神的话里特别要显出的，我们才能领会为甚么城里的屋子是不能归还。---      一：城在圣经里的属灵意义</p>
+			<img src="https://ss2.meipian.me/users/63101680/cb945036f3ee6b0a65464b1fba6ece25.jpg"/>
+		</div>	 -->
+    </div>
+    
+    <div class="recommend">
+		<span><img alt="" src="../img/info.png"> 精华推荐</span>
+		<span style="color: #7499ac;float: right;margin-right: 4vw;">&gt;</span>
+	</div>
+    
+    <div class="buttonDiv">
+    	<!-- <div>
+    		<button class="redButton"><img alt="" src="../img/meigui.png">送花</button>
+    		<button class="redButton">打赏</button>
+    	</div> -->
+    	<div id="threeBtn">
+    		<!-- <button class="whiteButton"><img alt="" src="../img/like.png">  255</button> -->
+	    	<button class="whiteButton" id="TimelineShare"><img alt="" src="../img/friends.png">  分享朋友圈</button>
+	    	<button class="whiteButton" id="AppMessageShare"><img alt="" src="../img/weixin.png">  发给朋友</button>
+    	</div>
+    	
+    </div>
+    
+	<div class="artList">
+		<h2>相关推荐</h2>
+		
+		<div onclick="recommend(1)">
+			<div>
+				<div>酒标</div>
+				<div style="font-size: 4vw;color: #9b9b9b;">阅读 28</div>
+			</div>
+			<div class="artCover" style="background-image: url('https://static2.ivwen.com/users/60612128/1aa0ae8a83bb5d6df39c0a7f5779d308.jpg');"></div>
+		</div>
+		<div onclick="recommend(2)">
+			<div>
+				<div>旅游吧</div>
+				<div style="font-size: 4vw;color: #9b9b9b;">阅读 58</div>
+			</div>
+			<div class="artCover" style="background-image: url('https://static2.ivwen.com/users/60612128/1a9efaa2576bae7d1307b1e714b42f9a.jpg');"></div>
+		</div>
+		
+		
+	</div>
+	<div class="comment">
+    	<div class="comment-2">
+    		<h2>精彩评论</h2>
+    		
+    		<div class="comment-2-write">
+    			<div class="comment-2-write-left"><img src="../img/default_head.png" ></div>
+				
+    			<div class="comment-2-write-right" id="writeComment">
+					期待你的评论...
+    				<img alt="" src="../img/pen.png">
+    			</div>
+				
+    			
+    		</div> 
+    		
+    		
+    	</div>
+    </div>
+	
+	
+	<!-- <div id="popover" class="mui-popover " style="width: 100vw;height: 20vh;"> -->
+	<div id="popover" class="box mui-popover mui-popover-action mui-popover-bottom commentArea">
+		<div class="input-div" style="display: flex;justify-content:center;align-items: center;height: 100%;width: 100%;">
+			<input type="text" class="" placeholder="期待你的评论..." style="margin: 15px 15px 15px" id="theComment" value="">
+			<button data-loading-text="提交中" href="#" class="mui-btn mui-btn-primary mui-btn-outlined" style="margin-right: 15px;">发送</button>
+		</div>
+		<!-- <div class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell"><a href="#">Item1</a></li>
+					<li class="mui-table-view-cell"><a href="#">Item2</a></li>
+					<li class="mui-table-view-cell"><a href="#">Item3</a></li>
+					<li class="mui-table-view-cell"><a href="#">Item4</a></li>
+					<li class="mui-table-view-cell"><a href="#">Item5</a></li>
+				</ul>
+			</div>
+		</div> -->
+	</div>
+	<!-- <a href="#popover" id="openPopover" class="mui-btn mui-btn-primary mui-btn-block">打开弹出菜单</a> -->
+	
+	<script src="../js/jquery-3.41.min.js"></script>
+	<script src="../js/mui.min.js"></script>
+	<script src="../js/clipboard.min.js"></script>
+	<script src="../js/util.js"></script>
+	<script src="../js/artDetails.js"></script>
+	
+<script>
+    // mui('.mui-scroll-wrapper').scroll()
+</script>
+</body>
+</html>
