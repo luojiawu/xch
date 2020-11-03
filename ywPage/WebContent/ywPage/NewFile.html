@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>忆我官网</title>
+<script src="../js/jquery-3.41.min.js"></script>
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+ul{list-style-type:none;}
+
+.header{
+	background-image: url(../image_gw/banner.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 40vw;
+    
+}	
+.header .icon{
+    margin-left: 5vw;
+    padding-top: 5vw;
+    margin-bottom: 2vw;
+    height: 7vw;
+    font-size: 3vw;
+    color: white;
+}
+.header .icon img{
+	width: 7vw;
+    vertical-align: middle;
+}
+.header p{
+	font-size: 3vw;
+	margin-left: 5vw;
+	color: white;
+	margin-left: 13vw;
+}
+.content-1{
+	width: 90vw;
+    margin: 5vw auto;
+    text-align: center;
+}
+.content-1 .title-1{
+	font-size: 4vw;
+    font-weight: bold;
+    margin-top: 2vw;
+}
+.content-1 .title-2{
+    font-size: 3vw;
+    margin-top: 1vw;
+    margin-bottom: 5vw;
+}
+.content-1 img{
+	height: 26vw;
+}
+.content-2{
+	background-color: #f4f4f4;
+    padding: 5vw;
+    text-align: center;
+}
+.content-2 .title-1{
+	font-size: 4vw;
+    font-weight: bold;
+    margin-top: 2vw;
+}
+.content-2 .title-2{
+    font-size: 3vw;
+    margin-top: 1vw;
+    margin-bottom: 5vw;
+}
+.content-2 .goodsImg{
+	display: inline-block;
+    width: 29vw;
+	font-size: 2vw;
+	
+}
+.content-2 .goodsImg img{
+	width: 29vw;
+	
+}
+
+.download {
+	background-image: url("../image_gw/download_img.png");
+	background-repeat: no-repeat;
+    background-size: cover;
+    height: 10vw;
+    text-align: center;
+}	
+.download div{
+    display: inline-block;
+    width: 24vw;
+    height: 6vw;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 1vw;
+    font-size: 3vw;
+    line-height: 6vw;
+    margin: 2vw;
+}
+.download div img{
+	width: 4vw;
+	vertical-align: sub;
+}
+.footer{
+	text-align: center;
+    font-size: 2vw;
+    padding: 5vw;
+}
+.footer p{
+	margin:1vw;
+}
+	
+</style>
+
+<script type="text/javascript">
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}(); 
+	
+$(function(){
+	
+	$("#android").on("click",function(){
+		
+		 if(!os.isAndroid){
+			 
+			 alert("请在安卓手机中打开");
+			 
+		 }else{
+			 window.location.href="https://sj.qq.com/myapp/detail.htm?apkName=com.gdyiwo.yw";
+		 }
+		
+	})
+	
+	$("#ios").on("click",function(){
+		
+		 if(!os.isPhone){
+			 
+			 alert("请在苹果手机中打开");
+			 
+		 }else{
+			 window.location.href="https://itunes.apple.com/cn/app/id1514909234?mt=8";
+		 }
+		 
+	})
+	
+	
+})	
+	
+</script>
+
+</head>
+<body>
+	<div class="header">
+		<div class="icon">
+			<img alt="" src="../image_gw/ywlogo.png">
+			忆生活，享感动
+		</div>	
+		<p>忆我</p>
+		<p>一款适合你的图文编辑创作分享应用</p>
+	</div>
+	<div class="content-1">
+		<div class="title-1">分享照片、书写文章</div>
+		<div class="title-2">记录美好回忆</div>
+		<img alt="" src="../image_gw/content_1_img_1.png">
+		<img alt="" src="../image_gw/content_1_img_2.png">
+	</div>
+	<div class="content-2">
+		<div class="title-1">印制每一刻精彩瞬间</div>
+		<div class="title-2">定制属于你的照片书</div>
+		<div class="goodsImg">
+			<img alt="" src="../image_gw/content_2_img_1.png">
+			照片打印
+		</div>
+		<div class="goodsImg">
+			<img alt="" src="../image_gw/content_2_img_2.png">
+			对裱书
+		</div>
+		<div class="goodsImg">
+			<img alt="" src="../image_gw/content_2_img_3.png">
+			胶装书
+		</div>
+	</div> 
+	<div class="download">
+		<div id="android">
+			<img alt="" src="../image_gw/android.png">
+			Android版
+		</div>
+		<div id="ios">
+			<img alt="" src="../image_gw/ios.png">
+			IOS版
+		</div>
+	</div>
+	<div class="footer" >
+		
+		<p class="address">公司名称：广东忆我网络科技有限公司</p>
+        <p class="address">公司电话：0754-88856541</p>
+        <p class="address">公司地址：广东省汕头市龙湖区龙湖工业区f2南座八楼蒲公英</p>
+        <p class="address">备案号：粤ICP备20021118号          <a class="ban1" target="_blank" href="http://www.beian.miit.gov.cn">粤ICP备20021118号-1</a>
+        </p>
+	
+	</div>
+</body>
+</html>
