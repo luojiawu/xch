@@ -97,7 +97,7 @@ body{
     background-color: #ffffff;
     position: fixed;
     bottom: 0;
-    /* display: none; */
+    display: none;
 }
 .progressDiv .progressSpan{
     height: 6vw;
