@@ -267,11 +267,24 @@ function picPreview(PicUrl){
 }
 
 function SetProgress(progress) { 
+  progress = progress.toFixed(2);
   if (progress) { 
    $("#progress > span").css("width", String(progress) + "%"); 
    $("#progress > span").html(String(progress) + "%"); 
   } 
- } 
+} 
+
+var HuiFang={
+		m_tishi :null,//全局变量 判断是否存在div,
+		//提示div 等待2秒自动关闭
+		Funtishi: function (content, url) {
+		if (HuiFang.m_tishi == null) {
+		HuiFang.m_tishi = '<div class="xiaoxikuang none" id="app_tishi" style="z-index:9999;left: 15%;width:70%;position: fixed;background:none;bottom:40%;"> <p class="app_tishi" style="background: none repeat scroll 0 0 #000; text-shadow:none;border-radius: 2vw;color: #fff; margin: 0 auto;padding: 3vw;text-align: center;width: 70%;opacity: 0.8; font-family:Microsoft YaHei;letter-spacing: 1vw;font-size: 5vw;"></p></div>';
+		$(document.body).append(HuiFang.m_tishi);
+		}
+		$("#app_tishi").show();
+		},
+}
 
 $(function(){
 	
@@ -309,18 +322,93 @@ $(function(){
 	
 
 	 $("#submitBtn").on("click",function(){
-		 $(".progressDiv").css("display","block");
+		 HuiFang.Funtishi("推荐码不能为空");
+		 /*
 		 if(confirm('确定要删除吗')==true){
 			 
-			 dec();
+			 dec2();
 
 		    }else{
 		       return false;
 
-		    }
+		    }*/
 		 
 		 
 	})
+	
+	function dec2(){
+		 
+		 var imgNum = $(".img-box").length;
+		 /* window.location.href="https://wx.tenpay.com/cgi-bin/mmpayweb-bin/checkmweb?prepay_id=wx071438322624427fca814441fb663f0000&package=2241788934"; */
+		  if(imgNum<PageMin){
+			 alert("至少上传"+PageMin+"张");
+		 }else{
+			$(".progressDiv").css("display","block");
+			var eachcount = 0;
+			
+			$(".img-box").each(function(){
+				
+		      var imgInfo = $(this).find("img").attr("src");
+		      var hor = $(this).attr("hor");
+		      var num = $(this).find(".numSpan").text();
+		      imgInfo = imgInfo.replace(/^data:image\/\w+;base64,/, '');
+		      
+		      var imgData = {"photo":imgInfo,"hor":hor,"num":num,"full": 1};
+		      imgList.push(imgData);
+		      
+		      
+		      
+		    });
+			console.log(imgList);
+			uploadImg(imgList,imgNum,eachcount);
+		 }
+		 
+	 }
+	
+	function uploadImg(imgList,imgNum,eachcount){
+		
+		mui.ajax(imgDo,{
+			type: "POST",
+			data:{"imgInfo":imgList[eachcount].photo,"UserID":UserID,"Token":Token},
+			async:true,
+			dataType:'json',//服务器返回json格式数据			type:'post',//HTTP请求类型
+			timeout:10000,//超时时间设置为10秒；
+			success:function(data){
+				
+				console.log(data)
+				
+				
+				if(data.code == 0){
+					
+					var mydata = data.data;
+					/*var newarray
+		            newarray = {
+		              "photo": mydata.photo,
+		              "num": imgData.num,
+		              "hor": imgData.hor,
+		              "full": 1 //等比例裁剪，1等比例缩放
+		            }*/
+					imgList[eachcount].photo = mydata.photo;
+					SetProgress((100/imgNum)*(eachcount+1));
+					//如果是最后一条数据，则跳转到订单页面
+					if(eachcount >= imgNum-1){
+						SetProgress(100);
+						var PicUrl = JSON.stringify(imgList);
+						
+						
+						picPreview(PicUrl);
+						
+					}else{
+						uploadImg(imgList,imgNum,++eachcount);
+					}
+				}
+			},
+			error:function(xhr,type,errorThrown){
+				
+			}
+		});
+			
+	}
 	
 	function dec(){
 		 
@@ -349,6 +437,7 @@ $(function(){
 					dataType:'json',//服务器返回json格式数据			type:'post',//HTTP请求类型
 					timeout:10000,//超时时间设置为10秒；
 					success:function(data){
+						console.log(eachcount);
 						console.log(data)
 						
 						
