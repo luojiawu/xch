@@ -32,6 +32,7 @@ $(function(){
 		
 	});
 	var proList;
+	var goodsType;
 	var ProId = getQueryVariable("ProID");
 	
 	var UserID = getQueryVariable("UserID");
@@ -52,6 +53,11 @@ $(function(){
 				if(mydata.code == 0){
 					proList = mydata.data;
 					console.log("proList",proList)
+					if(proList.ProID == 28){
+						goodsType = "calendar";
+					}else{
+						goodsType = "photo";
+					}
 					setBanner();
 					setPro();
 					setPhotoDetail();
@@ -186,7 +192,7 @@ $(function(){
 	$("#typeBtn").on("click",function(){     
 		
 		var RootCount = $("#numSpan").text();
-		var data = {"UserID":UserID,"Token":Token,"RootCount":RootCount,"PPID":proList.PropertyList[0].PPID,"ProID":ProId,"PageMin":proList.PageMin};
+		var data = {"UserID":UserID,"Token":Token,"RootCount":RootCount,"PPID":proList.PropertyList[0].PPID,"ProID":ProId,"PageMin":proList.PageMin,"type":goodsType};
 		if(proList.CID == 2){
 			window.location.href="artList.html?UserID="+UserID+"&Token="+Token+"&RootCount="+RootCount;
 		}else if(proList.CID == 3){

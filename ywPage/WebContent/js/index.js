@@ -14,7 +14,7 @@ $(function(){
 	
 	getHome();
 	
-	
+	/*alert("UserID-->"+UserID+",Token-->"+Token);*/
 	
 	
 	function getHome(){

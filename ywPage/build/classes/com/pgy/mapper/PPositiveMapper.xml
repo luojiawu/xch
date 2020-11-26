@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.pgy.mapper.PPositiveMapper">
+	
+	<update id="setUTF">SET NAMES utf8mb4</update>
+	<!-- 要返回的主键名写在keyProperty -->
+	<insert id="addAna" parameterType="com.pgy.dto.P_Ana" useGeneratedKeys="true" keyProperty="anaId">
+		insert into p_wx_ana values
+		(null,#{openId},#{templateId},#{templateType},#{anaTime},#{bindAnaId},#{bindOpenId},#{color})
+    	
+	</insert>
+	
+	<insert id="addReadLog" useGeneratedKeys="true" keyProperty="readId">
+		insert into p_wx_readlog values
+		(null,#{anaId},#{openId},#{nickname},#{headimgurl}, #{readTime})
+	</insert>
+	
+	<insert id="addUser">
+		insert into p_wx_user (openId,nickname,headimgurl,unionId,regTime,bindOpenId) values(#{openId},#{nickname},#{headimgurl},#{unionId},#{regTime},#{bindOpenId})
+	</insert>
+	
+	<update id="updateReadTimeByReadId">
+		
+		update p_wx_readlog set readTime = #{readTime} where readId = #{readId}
+	
+	</update>
+	
+	<update id="updateColorByAnaId">
+		
+		update p_wx_ana set color = #{color} where anaId = #{anaId}
+	
+	</update>
+	
+	<update id="updateUser">
+		update p_wx_user set nickname=#{nickname}, headimgurl=#{headimgurl} where openId = #{openId}
+	</update>
+	
+	<update id="updateUserSet">
+		update p_wx_user set recommend=#{recommend}, recommendTime_m=#{recommendTime_m}, recommendTime_n=#{recommendTime_n}, recommendTime_e=#{recommendTime_e}, clockIn=#{clockIn},eveningPager=#{eveningPager}, readNum=#{readNum} where openId = #{openId}
+	</update>
+	
+	
+	<select id="getReadLog" resultMap="readLogBaseResultMap">
+		
+		select * from p_wx_readlog where openId = #{openId}
+		
+	</select>
+	
+	<select id="getReadLogByAnaId" resultMap="readLogBaseResultMap">
+		
+		SELECT openId,nickname, headimgurl,sum(readTime) as readTime,count(*) as count FROM p_wx_readlog where anaId = #{anaId} GROUP BY openId;
+	</select>
+	
+	<select id="getUserByBindOpenId" resultMap="userBaseResultMap">
+		
+		select * from p_wx_user where bindOpenId = #{openId}
+		
+	</select>
+	
+	<select id="getAnaByBindOpenId" resultMap="anaBaseResultMap">
+		
+		select * from p_wx_ana where bindOpenId = #{openId}
+		
+	</select>
+	
+	<select id="getAnaIdByAna" resultMap="anaBaseResultMap">
+		
+		select * from p_wx_ana where openId = #{openId} and templateId = #{templateId}
+		
+	</select>
+	
+	
+	<select id="templateCount" resultType="int">
+		
+		select count(*) from p_wx_template
+		
+	</select>
+	
+	<select id="getAnaByAnaId" resultMap="anaBaseResultMap">
+		
+		select * from p_wx_ana where anaId = #{anaId}
+		
+	</select>
+	
+	<select id="getAnaByOpenId" resultMap="anaBaseResultMap">
+		
+		select * from p_wx_ana where openId = #{openId} order by anaTime desc
+		
+	</select>
+	
+	<select id="getTemplateById" resultMap="templateBaseResultMap">
+		
+		select * from p_wx_template where templateId = #{templateId}
+		
+	</select>
+	
+	<select id="getRegTimeByOpenId" resultType="long">
+		
+		select regTime from p_wx_user where openId = #{openId}
+		
+	</select>
+	
+	<select id="getUserByOpenId" resultMap="userBaseResultMap">
+		
+		select * from p_wx_user where openId = #{openId}
+		
+	</select>
+	
+	
+	<select id="getUserByPushedType" resultMap="userBaseResultMap">
+		
+		select * from p_wx_user
+		
+		<where>
+		   <if test="recommendTime_m !=null &amp;&amp; recommendTime_m !=''">
+		    recommendTime_m = #{recommendTime_m}
+		   </if>
+		   <if test="recommendTime_n !=null &amp;&amp; recommendTime_n !=''">
+		    and recommendTime_n = #{recommendTime_n}
+		   </if>
+		   <if test="recommendTime_e !=null &amp;&amp; recommendTime_e !=''">
+		    and recommendTime_e = #{recommendTime_e}
+		   </if>
+		   <if test="clockIn !=null &amp;&amp; clockIn !=''">
+		    and clockIn = #{clockIn}
+		   </if>
+		   <if test="eveningPager !=null &amp;&amp; eveningPager !=''">
+		    and eveningPager = #{eveningPager}
+		   </if>
+	  </where>
+		
+		
+	</select>
+	
+	
+	<resultMap id="readLogBaseResultMap" type="p_readLog" autoMapping="true"></resultMap>
+	<resultMap id="userBaseResultMap" type="p_user" autoMapping="true"></resultMap>
+	<resultMap id="anaBaseResultMap" type="p_ana" autoMapping="true"></resultMap>
+	<resultMap id="templateBaseResultMap" type="p_template" autoMapping="true"></resultMap>
+</mapper>

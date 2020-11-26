@@ -21,7 +21,7 @@ body{
 }
 .footer{
     height: 12vw;
-    width: 100vw;
+    width: 90vw;
     line-height: 12vw;
     background-color: #ffffff;
     font-size: 4vw;
@@ -36,11 +36,13 @@ body{
 .footer button{
     background-color: #398bf1;
     color: white;
-    width: 14vw;
+    width: 20vw;
     height: 8vw;
     border: none;
     line-height: 8vw;
     border-radius: 5vw;
+    float: right;
+    margin-top: 2vw;
 }
 
 .photoList .img-box{
@@ -49,7 +51,7 @@ body{
     flex-direction: column;
     position: relative;
     top: 0;
-    left: 0;
+    margin-bottom: 10vw;
     
 }
 .photoList .img-box .new-img{
@@ -58,27 +60,25 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .photoList .img-box .new-img div{
-	background-color:white;
-	height: 100%;
     text-align: center;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    position: absolute;
 }
 
 .photoList .img-box span{
 	color: white;
     font-size: 4vw;
-    width: 10vw;
-    position: absolute;
-    bottom: 0px;
     right: 3vw;
     text-align: center;
+    margin-bottom: -10vw;
 }
 
 .photoList .img-box .numSpan{

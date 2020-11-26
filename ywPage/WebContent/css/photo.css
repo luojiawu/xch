@@ -126,3 +126,37 @@ body{
  font-size:14px;
  width:0%;
 }
+.popup{
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.42);
+    position: fixed;
+    width: 100vw;
+    bottom: 0;
+    z-index: 3;
+    display: none;
+}	
+.popup div{
+    width: 60vw;
+    background-color: white;
+    margin: 30vh auto;
+    height: 35vw;
+    border-radius: 2vw;
+    border: solid 1px #9E9E9E;
+    font-size: 6vw;
+    text-align: center;
+    color: red;
+}
+.popup div p{
+	margin-top: 5vw;
+}
+.popup div button{
+    width: 16vw;
+    height: 10vw;
+    background-color: #F44336;
+    border: none;
+    border-radius: 1vw;
+    margin: 5vw 2vw;
+    line-height: 10vw;
+    font-size: 5vw;
+    color: white;
+}
