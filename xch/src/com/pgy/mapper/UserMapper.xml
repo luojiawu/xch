@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.pgy.mapper.UserMapper">
+	
+	
+	<!-- <insert id="addAndReplaceUser">
+		replace into p_user(openId,siteId,lastTime) values (#{openId},#{siteId},#{lastTime}); 
+	</insert> -->
+	
+	<select id="getAdminByAdminName" resultMap="adminBaseResultMap">
+	
+		select * from admin where adminName = #{adminName}
+	
+	</select>
+	
+	<insert id="addAndReplaceUser">
+	
+		insert into p_user(openId,unionId,siteId,lastTime) values (#{openId},#{unionId},#{siteId},#{lastTime})
+		ON DUPLICATE KEY UPDATE lastTime = values(lastTime) 
+		<if test="siteId!=null &amp;&amp; siteId!=''">
+			,siteId = values(siteId)
+		</if>
+	</insert>
+	
+	<select id="getUserByOpenId" resultMap="userBaseResultMap">
+		select * from p_user where openId = #{openId}; 
+	</select>
+	
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="userBaseResultMap" type="user" autoMapping="true"></resultMap>
+	<resultMap id="adminBaseResultMap" type="admin" autoMapping="true"></resultMap>
+	
+</mapper>

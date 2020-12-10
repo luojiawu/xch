@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>订单</title>
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/jquery.mobile-1.4.5.js"></script> 
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+.concealDiv{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.2);
+    display: none;
+} 
+.concealDiv .concealContent{
+    background-color: white;
+    width: 50vw;
+    height: 30vw;
+    margin: 0 auto;
+    border-radius: 2vw;
+    margin-top: 60vw;
+    padding-top: 6vw;
+    font-size: 6vw;
+    text-align: center;
+}
+.concealDiv .concealContent input{
+    width: 12vw;
+    border: none;
+    border-bottom: solid 1px #607D8B;
+    text-indent: 2vw;
+    font-size: 6vw;
+}
+.concealDiv .concealContent span{
+	display: inline-block;
+    width: 20vw;
+    height: 10vw;
+    line-height: 10vw;
+    margin-top: 6vw;
+    border-radius: 2vw;
+    color: white;
+}
+
+.main-page .header{
+	height: 24vw;
+    border-bottom: solid 4px #2196F3;
+    background-color: white;
+    margin-bottom: 1vw;
+}
+.main-page .header .userDiv{
+	width:94vw;
+	margin: 0 auto;
+	height: 10vw;
+    line-height: 10vw;
+    font-size: 4vw;
+    padding-top:2vw;
+}
+.main-page .header .userDiv .phone{
+	float: right;
+    margin-right: 6vw;
+}
+.main-page .header .addSite{
+	height: 24vw;
+    line-height: 24vw;
+    text-align: center;
+    font-size: 5vw;
+    color: #117dd4;
+}
+.main-page .header .siteDiv{
+	width:94vw;
+	margin: 0 auto;
+	font-size: 4vw;
+	color: #9E9E9E;
+} 
+.main-page .header .siteDiv .siteSpan{
+	float: left;
+    width: 90vw;
+}
+.main-page .header .siteDiv .tubiao{
+	float: right;
+    margin-top: -2vw;
+}
+.main-page .content{
+	
+    background-color: white;
+}
+.main-page .content div{
+	width: 94vw;
+	margin:0 auto;
+	 
+}
+.main-page .content .goodsDiv{
+	height:30vw; 
+	border-bottom:solid 1px #b1b0b0;
+    padding-top: 3vw;
+    font-size: 4vw;
+    color: #b9b9b9;
+}
+.main-page .content .goodsDiv .goodsLeft{
+	float: left;
+    width: 25vw;
+    height: 18vw;
+	overflow:hidden;
+	display: inline-block;
+	text-align: center;
+    margin-right: 2vw;
+    margin-top: 2vw;
+}
+.main-page .content .goodsDiv .goodsLeft .img_id{
+	position: relative;
+}
+.main-page .content .goodsDiv .goodsLeft img{
+	width: 24vw;
+	margin-top: 3vw;
+}
+.main-page .content .goodsDiv .goodsRight{
+	float: left;
+	width: 60vw;
+}
+.main-page .content .goodsDiv .goodsRight .goodsName{
+	font-size: 5vw;
+	color: black;
+}
+.main-page .content .moneyDiv{
+	height:20vw; 
+	border-bottom:solid 1px #b1b0b0;
+	font-size: 4vw;
+}
+.main-page .content .moneyDiv div{
+    height: 10vw;
+    line-height: 10vw;
+}
+.main-page .content .moneyDiv div .moneyLeft{
+	float: left;
+}
+.main-page .content .moneyDiv div .moneyLeft font{
+	color: #b9b9b9;
+}
+.main-page .content .moneyDiv div .moneyRight{
+	float: right;
+}
+.main-page .content .printingNum{
+	height:10vw; 
+    line-height: 10vw;
+    font-size: 4vw;
+}
+.main-page .content .printingNum .NumLeft{
+	float: left;
+}
+.main-page .content .printingNum .NumRight{
+	float: right;
+}
+.main-page .content .printingNum .NumRight font{
+    border-bottom: 1px solid black;
+    display: inline-block;
+    width: 8vw;
+    height: 7vw;
+    text-align: center;
+    margin-left: 1vw;
+}
+.main-page .postageDiv{
+	float: right;
+    margin-right: 3vw;
+    color: #F44336;
+    font-size: 4vw;
+    margin-top: 2vw;
+}
+.main-page .footer{
+    width: 100vw;
+    height: 16vw;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #9E9E9E;
+    background-color: white;
+    line-height: 10vw;
+}
+.main-page .footer span{
+	margin-left: 3vw;
+}
+.main-page .footer button{
+    width: 24vw;
+    height: 8vw;
+    background-color: #2196F3;
+    font-size: 4vw;
+    color: white;
+    float: right;
+    border: none;
+    border-radius: 4vw;
+    margin-top: 2vw;
+    margin-right: 6vw;
+}
+</style>
+
+<script type="text/javascript">
+
+//将触摸动作赋值到全局变量，用于下面判断
+var control = "touchstart";
+var loosen  = "click";
+
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}();  
+
+function imgCenter(){
+	
+	//调整照片取中间部分
+	var img = document.getElementById("img_id");
+   	var image = new Image();
+		image.src = $("#img_id").attr("src");
+    var realWidth = 0;//储存图片实际宽度
+    var realHeight = 0;//储存图片实际高度
+    var o = document.getElementById("imgDiv");
+    var h = o.offsetHeight; //高度
+    var w = o.offsetWidth; //宽度
+    image.onload = function () {
+        realWidth = image.width;//获取图片实际宽度
+        realHeight = image.height;//获取图片实际高度
+        //让img的宽高相当于图片实际宽高的等比缩放，然后再偏移
+        if (realWidth > realHeight){
+            img.width = (h/realHeight)*realWidth;//等比缩放宽度
+            img.height = h;//跟div高度一致
+            img.style.left = '-' + ((h/realHeight)*realWidth-w)/2 + 'px';//设置图片相对自己位置偏移为img标签的宽度-高度的一半
+        }else if (realWidth < realHeight){
+            img.width =w ;//跟div高度一致
+            img.height = (w/realWidth)*realHeight;//等比缩放高度
+            img.style.top = '-' + ((w/realWidth)*realHeight-h)/2 + 'px';//设置图片相对自己位置偏移为img标签的高度-宽度的一半
+        }else {
+            img.width =w ;
+            img.height = h;
+        }
+
+    };
+	
+	
+}
+
+$(document).on("pagecreate","#page",function(){
+	
+	
+	$("#goodsNum").parent().remove();
+	
+	//判断如果是pc端则将触摸动作改为点击动作
+	if(os.isPc){
+		control = "mousedown";
+		loosen  = "mouseup";
+	}
+	
+	imgCenter();
+	
+	$("#printingNum").on(loosen,function(){
+		
+		$(".concealDiv").css("display","block");
+		var goodsNum=$("#goodsNum").val(); 
+		$("#goodsNum").val("").focus().val(goodsNum); 
+	})
+	
+	$("#cancelSpan").on(loosen,function(){
+		$(".concealDiv").css("display","none");
+	})
+	var payMoney = ${map.order.money};
+	var goodsNum = 1;
+	$("#confirmSpan").on(loosen,function(){
+		
+		goodsNum = $("#goodsNum").val();
+		
+		if(goodsNum == ""){
+			goodsNum = 1;
+		}
+		
+		$("#printingNum .NumRight font").text(goodsNum);
+		
+		payMoney = goodsNum * ${map.order.money} + ${map.goods.postage};
+		
+		$(".footer span font:eq(0)").text(payMoney.toFixed(2));
+		
+		$(".concealDiv").css("display","none");
+		
+	})
+	
+	
+	$("#addSite").on(loosen,function(){
+		
+		window.location.href="toSite?siteId=0&checkbox=0&orderId=${map.order.orderId}&checkedSiteId=0";
+	})
+	
+	$("#siteList").on(loosen,function(){
+		var checkedSiteId = $("#checkedSiteId").val();
+		window.location.href="toSiteList?orderId=${map.order.orderId}&checkedSiteId="+checkedSiteId;
+	})
+	
+	$("#payBtn").on(loosen,function(){
+		var siteType = $("#siteType").val();
+		//地址验证
+		if(siteType == 0){
+			alert("请先填入地址");
+		}else{
+			
+			$.ajax({
+				type: "POST",
+		        url: "${ctx}/main/getPrepayId",
+		        data:{"orderId":"${map.order.orderId}","goodsNum":goodsNum},
+		        async: false,
+		        dataType:"json",
+		        success: function (data) {
+		        	var appId = data.appId;
+		        	var timeStamp = data.timeStamp;
+		        	var nonceStr = data.nonceStr;
+		        	var prepay_id = data.prepay_id;
+		        	var paySign = data.paySign;
+		        	if (typeof WeixinJSBridge == "undefined"){
+						   if( document.addEventListener ){
+						       document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+						   }else if (document.attachEvent){
+						       document.attachEvent('WeixinJSBridgeReady', onBridgeReady); 
+						       document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+						   }
+						   
+						   
+						window.event.returnValue = false;
+						
+					}else{
+					  
+					  onBridgeReady();
+					  
+					  function onBridgeReady(){
+						   WeixinJSBridge.invoke(
+						       'getBrandWCPayRequest', {
+						           "appId":appId,     //公众号名称，由商户传入     
+									"timeStamp":timeStamp,         //时间戳，自1970年以来的秒数     
+						           "nonceStr":nonceStr, //随机串     
+						           "package":prepay_id,     
+						           "signType":"MD5",         //微信签名方式：     
+						           "paySign":paySign //微信签名 
+					       },function(res){    
+					    	   //查看微信支付返回结果
+					    	   /* alert(JSON.stringify(res));
+					    	   WeixinJSBridge.log(res.err_msg);
+					    	   alert("返回结果---->"+res.err_msg); */
+							  if(res.err_msg == "get_brand_wcpay_request:ok" ) {// 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+								  
+								  setTimeout(function(){
+					        			
+									  alert("支付成功");
+									  window.location.href = "${ctx}/page/toOrderList";
+			    	        	
+								  }, 1000);
+							  }      
+					       }); 
+				    }
+					  
+					  
+		        	}	
+				}	
+		    });  
+			
+		}
+		
+		
+	});
+	
+
+	
+	
+
+
+
+});
+	
+	
+
+</script>
+
+</head>
+
+<body>
+	<div data-role="page" id="page">
+		<div data-role="main" class="main-page">
+		<div class="concealDiv">
+	        <div class="concealContent">
+	                              打印本数
+	            <input type="tel" id="goodsNum" value="1" maxlength="3" onkeyup="(this.v=function(){this.value=this.value.replace(/[^0-9-]+/,'');}).call(this)"/><br>
+	            <span style="background-color: #ff2121;" id="cancelSpan">取消</span>
+	            <span style="background-color: #03A9F4;" id="confirmSpan">确定</span>
+	        </div>
+	    </div>
+    	<div class="main-page">
+    	
+    	<div class="header">
+    	
+    		<#if map.site??>
+    			<input type="hidden" id="siteType" value="1"/>
+    			<div id="siteList">
+    				<input type="hidden" id="checkedSiteId" value="${map.site.siteId}"/>
+    				<div class="userDiv" id="userDiv">
+	    			<span>收货人：${map.site.name}</span>
+	    			<span class="phone">${map.site.phone}</span>
+		    		</div>
+		    		<div class="siteDiv">
+		    			<span class="siteSpan">
+		    			收货地址：
+		    			${map.site.site}
+		    			</span>
+		    			<span class="tubiao">
+		    				&gt;
+		    			</span>
+		    		</div>
+    			</div>
+    			
+	    	<#else>
+	    		<input type="hidden" id="siteType" value="0"/>
+	    		<div class="addSite" id="addSite">添加收货地址</div>
+    				
+	    		
+    		</#if>
+    		
+    		
+    	</div>
+    	
+    	<div class="content">
+    		
+    		<div class="goodsDiv">
+    			<div class="goodsLeft" id="imgDiv">
+    				<img id="img_id" class="img_id" alt="" src="../../${map.order.firstPhoto}">
+    			</div>
+    			<div class="goodsRight">
+    				<span class="goodsName">${map.goods.goodsName}</span><br>
+    				<span>工艺：数码快印</span><br>
+    				<span>张数：${map.order.photoNum}张</span><br>
+    				<span>尺寸：${map.type.typeSize}</span>
+    			</div>
+    		</div>
+    		<div class="moneyDiv">
+    			<div>
+    				<span class="moneyLeft">基础张数&nbsp;<font>(${map.type.defaultPaper}张以内)</font></span>
+    				<span class="moneyRight">￥${map.type.defaultPrice}</span>
+    			</div>
+    			<#if map.order.photoNum &gt; map.type.defaultPaper>
+    				<div>
+    					<span class="moneyLeft">追加张数&nbsp;<font>(￥${map.type.unitPrice}/页，共${map.order.photoNum-map.type.defaultPaper}页)</font></span>
+    					<span class="moneyRight">￥${(map.order.photoNum-map.type.defaultPaper)*map.type.unitPrice}</span>
+    				</div>
+    			</#if>
+    			
+    		</div>
+    		<div class="printingNum" id="printingNum">
+    			<span class="NumLeft">打印本数</span>
+    			<span class="NumRight">x<font>1</font></span>
+    		</div>
+    		
+    		
+    	</div>
+    	
+    	<#if map.goods.postage != 0 >
+    	<div class="postageDiv">
+   			注：邮费${map.goods.postage}元
+   		</div>
+   		</#if>
+   		
+    	<div class="footer">
+    		<span>合计：<font style="color: #F44336;">${map.order.money+map.goods.postage}</font><font style="color: #b9b9b9;">
+    		<#if map.goods.postage != 0 >
+		    		（邮费${map.goods.postage}元）
+		   	<#else>
+		   		（包邮）	
+	   		</#if>
+    		</font> </span>
+			<button id="payBtn">提交订单</button>
+		</div>
+		
+    	
+    	
+    	
+    	</div>
+    	</div>
+    </div>
+
+</body>
+</html>
+
+

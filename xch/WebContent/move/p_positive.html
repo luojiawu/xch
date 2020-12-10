@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>忆我正能量${newDate.day}</title>
+<script src="${ctx}/js/jquery.js"></script>
+			 
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js "></script>
+
+<style type="text/css">
+body{
+	background-color: ${map.color};
+	}
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+.header{
+	position: relative;
+}
+.header div{
+    height: 50vw;
+    width: 100vw;
+    background-image: url("${map.picUrl}");
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: cover;
+    vertical-align: top;
+} 
+.header .music{
+	background-image: url("${ctx}/img/music.png");
+    position: absolute;
+    width: 8vw;
+    height: 8vw;
+    background-size:100% 100%;
+    top: 2vw;
+    right: 5vw;
+}
+.middle{
+	height: 8vw;
+	margin: 5vw;
+    line-height: 8vw;
+}
+.middle .user{
+	float: left;
+}
+.middle .user img{
+	width: 8vw;
+	border-radius: 5vw;
+    vertical-align: top;
+}
+.middle .hello{
+	float: right;
+    border: 1px solid black;
+    width: 80px;
+    text-align: center;
+}
+.newDate{
+    display: inline-block;
+    width: 50vw;
+    margin-left: 5vw;
+    height: 24vw;
+    font-size: 4vw;
+}    
+.newDate div{
+	margin-bottom: 2vw;
+}
+.newDate .line{
+	border-bottom: 1px solid black;
+    width: 20vw;
+}
+.content{
+	margin-left: 5vw;
+}   
+.content .title{
+	font-size: 6vw;
+}
+.content .title font {
+	color: red;
+	font-size: 7vw;
+	margin: 0 2vw;
+}
+.content p{
+	width: 90vw;
+    margin-top: 2vw;
+    letter-spacing: 1vw;
+    font-size: 4vw;
+}
+
+.shareBtn{
+    margin: 5vw;
+    margin-top: 18vw;
+    text-align: center;
+    font-size: 6vw;
+    background-color: #ff4701;
+    height: 14vw;
+    border-radius: 2vw;
+    color: #ffe9db;
+    line-height: 14vw;
+}
+.colorDiv{
+    margin-left: 5vw;
+    width: 60vw;
+    font-size: 3vw;
+    position: fixed;
+    bottom: 2vw;
+}
+.colorDiv div{
+	display: inline-block;
+    width: 3vw;
+    height: 3vw;
+    margin: 2px;
+    border: 1px solid #000000;
+    border-radius: 5vw;
+}
+</style>
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body>  
+	<div class="header">
+		<div></div>
+		<span id="music" class="music">
+			
+		</span>
+	</div>
+	<div class="middle">
+		<div class="user">
+			<img alt="" src="${map.headimgurl}">
+			${map.nickname}
+		</div>
+		<div class="hello">
+			${newDate.helloSpan}
+		</div>
+	</div>
+	<div class="newDate">
+		<div>${newDate.day}</div>
+		<div style="font-size: 3vw">${newDate.lunar}</div>
+		<div class="line"></div>
+		<div style="font-size: 3vw">${newDate.week}</div>
+	</div>
+	<div class="content">
+		<div class="title">
+			成为更好的自己，第<font>${numberDay}</font>天
+		</div>
+		<p>
+			${map.content}${newDate.hello}
+		</p>
+	</div>
+	<#if type != "1">
+	  <div class="shareBtn" id="shareBtn">
+			免费换成我的名片
+	  </div>
+	<#else>  
+	  <div class="colorDiv" id="colorBtn">
+	  		更换背景<br>
+			<div style="background-color: white;"><input type="hidden" value="white"></div>
+			<div style="background-color: #9E9E9E;"><input type="hidden" value="#9E9E9E"></div>
+			<div style="background-color: #fd786e;"><input type="hidden" value="#fd786e"></div>
+		  	<div style="background-color: #01594b;"><input type="hidden" value="#01594b"></div>
+		  	<div style="background-color: #fff1d9;"><input type="hidden" value="#fff1d9"></div>
+		  	<div style="background-color: #ffe9e5;"><input type="hidden" value="#ffe9e5"></div>
+		  	<div style="background-color: #def2fa;"><input type="hidden" value="#def2fa"></div>
+		  
+	  
+	  </div>
+	</#if>
+<audio id="player" autoplay="autoplay" style="display: none;">
+   <source src="${pcm}"/>
+</audio>
+
+<script>
+   function playMusic() {
+        var player = $("#player")[0];
+        if (player.paused){ /*如果已经暂停*/
+            player.play(); /*播放*/
+            $(".header .music").css("background-image","url('${ctx}/img/music.png')");
+        }else {
+            player.pause();/*暂停*/										
+            $(".header .music").css("background-image","url('${ctx}/img/music_shut.png')");
+        }
+    }
+   
+   function getMp3(){
+	   
+	   $.ajax({
+			type: "POST",
+	        url: "${ctx}/p/getMp3",
+	        data:"pcm=${pcm}",
+	        async: false,
+	        dataType:"text",
+	        success: function (mp3) {
+	        	
+	        	if(mp3 != null){
+	        		$("#player source").attr("src",mp3);
+	        		playMusic();
+	        	}
+	        }	
+				
+		});  
+	   
+   }
+   
+   function getJsSdkConfig(){
+		var lUrl = encodeURIComponent(window.location.href);
+		var wxData = {
+	        "imgUrl" : '${map.PhotoCover}', //分享图标
+	        "link"   : "",
+	        "title"  : '${map.Title}',
+	        "desc"   : '忆我科技'
+	    };
+		$.ajax({
+				type: "POST",
+		        url: "${ctx}/p/getJsSDK",
+		        data:"lUrl="+lUrl,
+		        async: false,
+		        dataType:"json",
+		        success: function (config) {
+		        	
+		        	if(config != null){
+		        		wx.config({
+		        	        debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+		        	        appId : config.appId, // 必填，appID公众号的唯一标识
+		        	        timestamp : config.timestamp, // 必填，生成签名的时间戳
+		        	        nonceStr : config.nonceStr, // 必填，生成签名的随机串
+		        	        signature : config.signature,// 必填，签名，见附录1
+		        	        jsApiList: [
+		        	        	'onMenuShareTimeline',
+		        	        	'onMenuShareAppMessage'
+		        	        ]
+		        	    }); 
+		        	    
+		        	    wx.ready(function () {
+		        	    	
+		        	    	wx.onMenuShareTimeline({ 
+			        	        title: wxData.title, // 分享标题
+			        	        link: wxData.link, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+			        	        imgUrl: wxData.imgUrl, // 分享图标
+			        	        success: function () {
+			        	          
+			        	        }
+		        	        });
+		        	    	wx.onMenuShareAppMessage({
+		        	            title: wxData.title,
+		        	            desc: wxData.desc,
+		        	            link: wxData.link,
+		        	            imgUrl: wxData.imgUrl,
+		        	            type: 'link',
+		        	            dataUrl: '',
+		        	            success: function () {
+		        	            }
+		        	        });
+		        	    	
+		        	    });
+		        	    
+		        	    
+		        	    
+		        	}
+		        }	
+					
+			});  
+		
+	}
+   
+   $(function(){
+	   
+	   getJsSdkConfig();
+	   
+	   $("#music").on("click",function(){
+		   
+		   playMusic();
+		   
+	   })
+	   
+	   $("#shareBtn").on("click",function(){
+		   
+		   window.location.href = "${ctx}/p/toCopyAna?bindAnaId=${map.anaId}&templateId=${map.templateId}&bindOpenId=${map.openId}";
+			
+	   })
+	   
+	   $(".colorDiv div").on("click",function(){
+		   
+		   
+		   var color = $(this).find("input").val();
+		   var data = {"anaId":${map.anaId},"color":color}
+		   
+		   $.ajax({
+				type: "POST",
+		        url: "${ctx}/p/setColorByAnaId",
+		        data:data,
+		        async: false,
+		        dataType:"text",
+		        success: function (code) {
+		        	
+		        	if(code == "1"){
+		        		$("body").css("background-color",color);
+		        		
+		        		if("#f51504" == color){
+		        			$(".content .title font").css("color","black");
+		        		}else{
+		        			
+		        			$(".content .title font").css("color","red");
+		        		}
+		        		
+		        		//$("body").css("background-color",$(this).find("input").val());	
+		        	}else{
+		        		
+		        		alert("更换背景失败");
+		        	}
+		        	
+		        }	
+					
+			});  
+		   
+	   })
+	   
+	   
+	   
+   })
+   
+   
+</script>
+	
+	
+</body>
+</html>

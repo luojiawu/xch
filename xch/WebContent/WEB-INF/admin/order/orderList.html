@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css" />
+    <script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+   
+    <!-- 弹窗 -->
+    <script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+	<link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+    
+    <script type="text/javascript">
+    
+    
+    
+     function deletes(id){
+    	var d = dialog({
+				title: '温馨提示',
+			    content: '<font size=6 color=#43aebe>您确定要删除对应的数据吗？</font>',
+				okValue:'确定',
+				ok:function(){
+					this.title("请稍等");
+					window.location="${ctx}/admin/order/delete?id="+id;
+					return false;
+				},
+			    cancelValue:'取消',
+			    //用于隐藏 什么都不写就自动隐藏
+			    cancel:function(){}
+   			});
+   	 	//表示弹出对话框，showModal表示出现该对话框则不能点其他
+		d.showModal();
+     }
+   
+	 function getSiteBySiteId(siteId){
+    	 
+		 $.ajax({
+				type: "POST",
+		        url: "${ctx}/admin/getSiteBySiteId",
+		        data:"siteId="+siteId,
+		        async: false,
+		        dataType:"json",
+		        success: function (site) {
+		        	
+		        	if(site != null){
+		        		
+		        		$("#siteName").val("姓名："+site.name);
+		        		$("#sitePhone").val("电话："+site.phone);
+		        		$("#siteContent").val("地址："+site.site);
+		        		
+		        		var d = dialog({
+		    				title: '订单地址',
+		    			    content: '<font size=4 color=#43aebe>姓名：'+site.name+'</font><br><font size=4 color=#43aebe>电话：'+site.phone+'</font><br><font size=4 color=#43aebe>地址：'+site.site+'</font>',
+		    				
+		       			});
+			       	 	//表示弹出对话框，showModal表示出现该对话框则不能点其他
+			    		d.showModal();
+		        		
+		        		
+		        		
+		        	}
+		        }	
+					
+			});  
+		 
+    	 
+     }
+     
+     function updateOrderStatus(orderId){
+    	 
+    	 
+    	 var d = dialog({
+				title: '修改订单状态',
+			    content: '<font size=5 color=#F44336>如果已发货，请点击确定。</font>',
+				okValue:'确定',
+				ok:function(){
+					this.title("请稍等");
+					$.ajax({
+						type: "POST",
+				        url: "${ctx}/admin/updateOrderStatusByOrderId",
+				        data:"orderId="+orderId,
+				        async: false,
+				        dataType:"json",
+				        success: function (code) {
+				        	
+				        	if(code == "1"){
+				        		
+				        		window.location.reload();
+				        	}
+				        }	
+							
+					});  
+					
+					return false;
+				},
+			    cancelValue:'取消',
+			    //用于隐藏 什么都不写就自动隐藏
+			    cancel:function(){}
+			});
+	 	//表示弹出对话框，showModal表示出现该对话框则不能点其他
+		d.showModal();
+    	 
+    	 
+     }
+ 
+    
+    </script>
+    
+</head>
+<body>
+<div class="siteDiv">
+	
+	<div id="siteName"></div>
+	<div id="sitePhone"></div>
+	<div id="siteContent"></div>
+	
+</div>
+<form class="form-inline definewidth m20" action="${ctx}/admin/orderList" method="post">  
+    订单编号：<input type="text" name="orderId" cssStyle="width:155px;" class="abc input-default" placeholder="请输入需要查询的订单编号" value="">&nbsp;&nbsp;  
+    商品类型：<select name="goodsId" style="width:198px;">
+			<option  value="">请选择商品类型</option>
+			<#list goodsList as goods>
+				<option value="${goods.goodsId}">${goods.goodsName}</option>
+			</#list>
+		 </select>
+    订单状态：<select name="status" style="width:126px;">
+			<option value="">请选择订单状态</option>
+			<option value="-1">订单关闭</option>
+			<option value="0">待支付</option>
+			<option value="1">已支付</option>
+			<option value="2">已发货</option>
+		</select>  
+		   
+    
+      &nbsp;&nbsp;<button type="submit" class="btn btn-primary">查询</button> 
+</form>
+<table class="table table-bordered table-hover definewidth m10" >
+    <thead>
+    <tr>
+        <th>序号</th>
+        <th>订单编号</th>
+        <th>商品名称</th>
+        <th>规格</th>
+        <th>照片数量</th>
+        <th>单本价格</th>
+        <th>本数</th>
+        <th>总金额</th>
+        <th>下单时间</th>
+        <th>订单状态</th>
+        <th>支付时间</th>
+        <th>地址信息</th>
+        <th colspan="2" style="text-align:center">操作</th>
+        <!-- <th colspan="3" style="text-align:center">操作</th> -->
+    </tr>
+    </thead>
+    	<#if orderList??>
+    	<#list orderList as order>
+	     <tr>
+            <td style="text-align: center;">${order_index+1}</td>
+            <td>${order.orderId}</td>
+            <td>${order.goods.goodsName}</td>
+            <td>${order.type.typeName}</td>
+            <td>${order.photoNum}</td>
+            <td>${order.money}</td>
+            <td>${order.goodsNum}</td>
+            <td>
+            	
+            	<#if order.status gt 0>
+            		${order.payMoney}
+            	<#else>
+            		${order.money*order.goodsNum}
+            	</#if>
+            </td>
+            <td>${order.orderTime?number?number_to_datetime?string('yyyy-MM-dd hh:mm:ss')}</td>
+            <td>
+            <#if order.status == -1>
+            	<font color="red">订单关闭</font>
+            <#elseif order.status == 0>
+            	<font color="red">待支付</font>
+            <#elseif order.status == 1>
+            	<font color="blue">已支付</font>
+            <#elseif order.status == 2>
+            	<font color="blue">已发货</font>
+            </#if>
+            
+            <td>
+            <#if order.payTime != "">
+            	${order.payTime?number?number_to_datetime?string('yyyy-MM-dd hh:mm:ss')}
+            </#if>
+            </td>
+            
+            <td> 
+            	<a style="cursor: pointer;" onclick="getSiteBySiteId(${order.siteId})">查看地址</a>
+            </td>
+            <td>
+            	<a href="${ctx}/main/downloadPhotoBook?orderId=${order.orderId}">下载照片</a>
+            </td>
+            <td>
+            	<a style="cursor: pointer;" onclick="updateOrderStatus('${order.orderId}')">修改状态</a>
+            </td>
+        </tr>
+        </#list>
+        </#if>
+     </table>
+     <div style="margin:5px 0px;text-align:center;background-color:rgba(57, 80, 138, 0.56)">
+      共${pageModel.recordCount}条，分${((pageModel.recordCount+pageModel.pageSize-1)/pageModel.pageSize)?int}页
+    </div>
+    <div id="pager">
+    <#if pageModel.recordCount??>
+    	<#import "../common/pager.html" as page>
+    	<@page.pager pageIndex=pageModel.pageIndex pageSize=pageModel.pageSize recordCount=pageModel.recordCount toURL="${ctx}/admin/goodsList"/>
+  	</#if>
+	</div>
+    
+</body>
+</html>

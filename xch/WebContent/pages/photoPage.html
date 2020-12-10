@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>照片上传</title>
+<link href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/jquery.mobile-1.4.5.js"></script> 
+<script type="text/javascript" src="${ctx}/js/jquery.form.js"></script>
+<script href="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="http://cdn.bootcss.com/bootstrap-fileinput/4.3.8/js/fileinput.min.js" type="text/javascript"></script>
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
+
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+.main-page{
+	width:94vw;
+	margin: 0 auto;
+}
+.main-page .header{
+	padding-bottom:4vw;
+	padding-top:4vw;
+	height: 14vw;
+	line-height: 6vw;
+	font-size: 4vw;
+}
+.main-page .header>span{
+	display: inline-block;
+    float: right;
+    width: 22vw;
+    height: 8vw;
+    line-height: 8vw;
+    font-size: 5vw;
+    background-color: #2196F3;
+    border-radius: 1vw;
+    color: white;
+    text-align: center;
+}
+
+/*外层div*/
+.input-file-box{
+	border: 1px solid gray;
+    width: 45vw;
+    height: 30vw;
+    display:inline-block;
+    position: relative;
+    text-align: center;
+    border-radius: 8px;
+}
+/*文字描述*/
+.input-file-box > span{
+	display: block;
+    width: 100px;
+    height: 30px;
+    position: absolute;
+    top: 0px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    color: gray;
+}
+/*input框*/
+.input-file-box #uploadfile{
+	opacity: 0;
+    width: 100%;
+    height: 30vw;
+    cursor: pointer;
+}	
+	
+	
+
+</style>
+
+<script type="text/javascript">
+
+//将触摸动作赋值到全局变量，用于下面判断
+var control = "touchstart";
+var loosen  = "touchend";
+//用于存放图片
+var serverIds = [];
+var surplusPaper = ${defaultPaper}<=0?1:${defaultPaper};
+
+function getJsSdkConfig(){
+	var lUrl = encodeURIComponent(window.location.href);
+	
+	$.ajax({
+			type: "POST",
+	        url: "${ctx}/main/getJsSDK",
+	        data:"lUrl="+lUrl,
+	        async: false,
+	        dataType:"json",
+	        success: function (config) {
+	        	
+	        	if(config != null){
+	        		wx.config({
+	        	        debug : false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+	        	        appId : config.appId, // 必填，appID公众号的唯一标识
+	        	        timestamp : config.timestamp, // 必填，生成签名的时间戳
+	        	        nonceStr : config.nonceStr, // 必填，生成签名的随机串
+	        	        signature : config.signature,// 必填，签名，见附录1
+	        	        jsApiList : [ 'scanQRCode' ,'onMenuShareTimeline',"chooseImage","uploadImage"]
+	        	    // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+	        	    }); 
+	        	}
+	        }	
+			
+		});  
+	
+}
+
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}();  
+
+$(document).on("pagecreate","#page",function(){
+	
+	
+	getJsSdkConfig();
+	//判断如果是pc端则将触摸动作改为点击动作
+	if(os.isPc){
+		control = "mousedown";
+		loosen  = "mouseup";
+	}
+	
+	/* function dataURLtoFile(dataurl, filename) {
+	    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/),
+	        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+	    while(n--){
+	        u8arr[n] = bstr.charCodeAt(n);
+	    }
+	    return new File([u8arr], filename, {type:mime});
+  	}    */
+	
+  	$("#uploadPhoto").on(control,function(){
+  		
+  		$(this).css("background-color","#F44336");
+  		
+  	})
+  	
+	$("#uploadPhoto").on(loosen,function(){     
+		 
+		$(this).css("background-color","#2196F3");
+		
+		if(surplusPaper>serverIds.length){
+			alert("最少打印"+surplusPaper+"张");
+		}else{
+			var formData = new FormData();
+			
+			formData.append("fileInput", serverIds);
+			formData.append("goodsId", ${goodsId});
+			formData.append("typeId", ${typeId});
+			
+			
+			$.ajax({
+	            type: "POST",			
+	                url: "${ctx}/admin/uploadPhoto",
+	                data:formData,
+	                async: false,
+	                dataType:"text",
+	                //这两个设置项必填
+	                contentType: false,
+	                processData: false,
+	                success: function (data) {
+	                  
+	                	if(data != "error"){
+	        				
+	        				setTimeout(function(){
+	        					window.location.href="toOrder?orderId="+data;
+	                		}, 1000);
+	        				
+	        			}
+	                },
+	              	//失败时的函数
+	        		error:function(){
+	        			alert("照片上传失败");
+	        		}	
+	          });
+		}
+		
+		
+		
+		
+	})
+	
+	
+	
+	
+	
+	
+	
+	$("#upImg").on(loosen,function(){     
+		
+	    wx.chooseImage({
+            count: 9, // 默认9
+            sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+            sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+            success: function (res) {
+              var localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+              
+              for (i in localIds) {
+	    			var src = localIds[i];
+	    			var div=document.createElement('div');
+ 					div.style.border = "1px solid gray";
+ 					div.style.width = "45vw";
+ 					div.style.height = "30vw";
+ 					div.style.position = "relative";
+ 					div.style.textAlign = "center";
+ 					div.style.borderRadius = "8px";
+ 					div.style.display = "inline-block";
+ 					div.style.marginRight = "4px";
+ 					div.style.marginBottom = "4px";
+ 					div.style.overflow = "hidden";
+ 					div.innerHTML='<img style="width:100%;height:100%;" src="'+src+'" />';
+ 					document.getElementById("img-box").appendChild(div);
+ 					
+ 					wx.uploadImage({
+ 		        		localId: src, // 需要上传的图片的本地ID，由chooseImage接口获得
+ 		        		isShowProgressTips: 0, // 默认为1，显示进度提示
+ 		        		success: function (res) {
+ 		        			serverIds.push(res.serverId);//// 返回图片的服务器端ID
+ 		        			//alert("排队上传图片到微信服务器成功serverId："+res.serverId);
+ 		        			
+ 		        		}
+ 		    		});
+ 				}
+              //alert("serverIds："+serverIds);
+            }
+        });
+		
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+	
+});
+
+$('#uploadfile').fileinput({
+    language: 'fr',
+    uploadUrl: '#',
+    allowedFileExtensions : ['jpg', 'png','gif'],
+    'elErrorContainer': '#errorBlock'
+});
+
+/* window.onload=function(){
+	var input=document.getElementById("uploadfile");
+	var div;
+	// 当用户上传时触发事件
+	input.onchange=function(){
+		readFile(this);
+	}
+		//处理图片并添加都dom中的函数
+		var readFile=function(obj){
+			// 获取input里面的文件组
+			var fileList=obj.files;
+			//对文件组进行遍历，可以到控制台打印出fileList去看看
+			for(var i=0;i<fileList.length;i++){
+				var reader= new FileReader();
+				reader.readAsDataURL(fileList[i]);
+				 // 当文件读取成功时执行的函数
+				reader.onload=function(e){
+					div=document.createElement('div');
+					div.style.border = "1px solid gray";
+					div.style.width = "30vw";
+					div.style.height = "30vw";
+					div.style.position = "relative";
+					div.style.textAlign = "center";
+					div.style.borderAadius = "8px";
+					div.style.display = "inline-block";
+					div.style.marginRight = "2px";
+					div.innerHTML='<img style="width:100%;height:100%;" src="'+this.result+'" />';
+					document.getElementById("img-box").appendChild(div);
+				}
+			}
+		}
+	
+		
+} */
+	
+	
+
+</script>
+
+</head>
+<body>
+	<div data-role="page" id="page">
+		<div data-role="main" class="main-page">
+		
+    	<div class="main-page">
+    	<form action="${ctx}/photo/uploadPhoto" style="display:none;"  method="POST" id="fileForm"
+		enctype="multipart/form-data">
+			<input type="hidden" name="goodsId" id="orderId" value="${goodsId}"/>
+			<input type="hidden" name="orderId" id="typeId" value="${typeId}"/>
+			<input type="hidden" name="orderId" id="defaultPaper" value="${defaultPaper}"/>
+			
+		　　<!-- <div id="filePicker" name="filePicker" class="webuploader-container"><div class="webuploader-pick" style="">选择图片</div><div id="rt_rt_1d5oc8b4l1um1q4d1h68fum1u5b1" style="position: absolute; top: 0px; left: 0px; width: 1px; height: 1px; overflow: hidden;"><input type="file" name="file" id="" class="webuploader-element-invisible" multiple accept="image/jpg,image/jpeg,image/png"><label style="opacity: 0; width: 100%; height: 100%; display: block; cursor: pointer; background: rgb(255, 255, 255);"></label></div></div>  
+					   <button id="ctlBtn" class="btn btn-default">开始上传</button>  -->
+		</form>
+    	<div class="header">
+    		影集
+    		<span id="uploadPhoto">下一步</span>
+    	</div>
+    	<div id="img-box"></div>
+    	<div class="input-file-box" id="upImg">
+    	
+			<span>点击上传图片</span>
+			<!-- <form id="photoForm" enctype="multipart/form-data" method="POST">
+	           			
+	          	<input type="file" name="photo" id="uploadfile" multiple>
+		      	
+         	</form> -->
+			
+		</div>
+		
+    	
+    	<!-- <div class="putPicture" id="putPicture">
+			<p>请上传自定义背景图</p>
+			<form id="imgForm" enctype="multipart/form-data" method="POST">
+       			<input style="font-size: 6vw;width: 72vw;" multiple type="file" name="photo"/>
+       		</form>
+          		
+       		<button type="botton" id="cancel" style="color: #607D8B;">关闭</button>
+       		<button type="submit" class="btn btn-primary" form="imgForm" style="color:red;">添加</button>
+       		
+		</div> -->
+    	
+    	<!-- <form action="${ctx}/demo/addPicture" method="POST" name="photo" id="photo"
+		enctype="multipart/form-data">
+		
+			<div>指明需要多张图片</div>
+	  		<input type="file" name="img">
+			<input type="submit" value="提交" />
+				
+		
+		</form> -->
+    	
+    	</div>
+    	</div>
+    </div>
+<script>
+    
+ 
+</script>
+</body>
+</html>

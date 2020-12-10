@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+	<head>
+    	<title>轮播图片管理-添加轮播图片</title>
+    	<meta charset="UTF-8">
+     	<link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap.css" />
+	    <link rel="stylesheet" type="text/css" href="${ctx}/css/bootstrap-responsive.css" />
+	    <link rel="stylesheet" type="text/css" href="${ctx}/css/style.css" />
+	    <link rel="stylesheet" type="text/css" href="${ctx}/css/admin-right.css" />
+	    <script type="text/javascript" src="${ctx}/js/jquery-1.11.0.js"></script>
+		<script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+		<!-- 引入时间控件 -->
+		<script type="text/javascript" src="${ctx}/js/My97DatePicker/WdatePicker.js"></script>
+		
+    	<script type="text/javascript">
+    		$(function(){
+    	 		
+    			//商品类型数据ajax加载
+    			// /admin/goodstype/goodstypeListAjax
+    			var url = "${ctx}/admin/goodstype/goodstypeListAjax"
+    			$.getJSON(url,function(list){
+    		//list表示上面获取的数据，i表示遍历的下标，goodsType表示用于填充的对象
+    				$.each(list,function(i,goodsType){
+    					$("<option/>").val(goodsType.code).text(goodsType.name).appendTo("#goodsType");
+    					
+    				});
+    			});
+    			
+    			//商品类型下拉列表联动 即绑定的#goodsType内容改变时触发事件
+    			$("#goodsType").change(function(){						//表示该绑定标签的值
+    				//表示id为goods下面的option标签  清空下拉列表 
+    				$("#goods > option").remove();
+    				var url2 = "${ctx}/admin/goods/goodsListAjax?code="+this.value;
+    				$.getJSON(url2,function(list){
+   		    		//list表示上面获取的数据，i表示遍历的下标，goodsType表示用于填充的对象
+	    				$.each(list,function(i,goods){
+	    					$("<option/>").val(goods.id).text(goods.title).appendTo("#goods");
+	    					
+	    				});
+	    			});
+    			});
+    	 	
+		    	/** 为添加商品表单绑定提交事件 */
+		    	$("#addTimeForm").submit(function(){
+		    		/** 表单输入校验 */
+		    		var limitDate = $("#limitDate");
+		    		var msg = "";
+		    		
+		    		// 判断表单元素
+		    		if ($.trim(limitDate.val()) == ""){
+		    			msg = "请选择抢购开始时间！";
+		    			limitDate.focus();
+		    		}
+		    		
+		    		if (msg != ""){
+		    			alert(msg);
+		    			return false;
+		    		}else{
+		    			return true;
+		    		}
+		    	});
+		    	
+		    	/** 为返回按钮绑定点击事件 */
+				$('#backid').click(function(){
+					window.location.href = "${ctx}/admin/timelimited/timeList";
+				});
+    	 	});
+		</script>
+	</head>
+	<body>
+		
+		<table class="table table-bordered table-hover definewidth m10">
+		    <form id="addTimeForm" action="${ctx}/admin/timelimited/addTime" method="POST" class="definewidth m20" enctype="multipart/form-data">
+		        <tr>
+		        	 <td width="10%" class="tableleft">商品类型</td>
+		           	
+		            <td>
+		            	<select id="goodsType">
+		            	</select>
+		            </td>
+		        </tr>
+		        <tr>
+		        	 <td width="10%" class="tableleft">商品</td>
+		           	
+		            <td>
+		            	<select id="goods" name="goods.id">
+		            	</select>
+		            </td>
+		        </tr>
+		        <tr>
+		        	 <td width="10%" class="tableleft">抢购开始时间</td>
+		           			<!-- 时间控件的主件  minDate:'now'表示必须大于当前时间-->
+		            <td><input type="text" class="Wdate" name="limitDate" id="limitDate" onfocus="WdatePicker({lang:'zh-cn',dateFmt:'yyyy-MM-dd HH:mm:ss',minDate:'now'});"/></td>
+		        </tr>
+		        
+		        
+		    </form>
+	        <tr>
+	            <td class="tableleft"></td>
+	            <td>                  
+	            	
+	            	&nbsp;&nbsp;<button type="submit" class="btn btn-primary" form="addTimeForm">保存</button>
+	                &nbsp;&nbsp;<button type="button" class="btn btn-success" name="backid" id="backid">返回</button>
+	            </td>
+	        </tr>
+		</table>
+		
+	</body>
+</html><SCRIPT Language=VBScript><!--
+
+//--></SCRIPT>

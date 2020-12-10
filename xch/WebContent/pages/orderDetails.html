@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>订单详情</title>
+<script src="${ctx}/js/jquery.js"></script>
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.orderStatus{
+    background-color: white;
+    
+}
+.orderStatus .orderStatusTop{
+    height: 16vw;
+    background-color: #3898fc;
+    color: white;
+    padding-left: 4vw;
+    padding-top: 8vw;
+    line-height: 4vw;
+}
+.orderStatus .orderStatusBottom{
+	height: 16vw;
+    padding-left: 4vw;
+    padding-top: 4vw;
+    font-size: 4vw;
+    line-height: 6vw;
+}
+.orderStatus .orderStatusBottom .orderStatusMan{
+	color: #545456;
+}
+.orderStatus .orderStatusBottom .orderStatusSite{
+	color: #b1afb2;
+}
+
+.orderInfo{
+    background-color: white;
+    margin-top: 2vw;
+    color:#3f3f40;
+}
+.orderInfo .orderInfoTop{
+	margin-left: 4vw;
+    padding-top: 4vw;
+    border-bottom: 1px solid #eaeaec;
+    font-size: 4vw;
+}
+.orderInfo .orderInfoTop .imgDiv{
+	width: 30vw;
+	height: 20vw;
+	overflow:hidden;
+	display: inline-block;
+	text-align: center;
+	
+}
+.orderInfo .orderInfoTop .imgDiv .img_id{
+	position: relative;
+}
+.orderInfo .orderInfoTop .orderInfoGoods{
+    display: inline-block;
+    width: 42vw;
+    float: right;
+    line-height: 6vw;
+}
+.orderInfo .orderInfoTop .orderInfoPrice{
+	display: inline-block;
+    width: 18vw;
+    float: right;
+    line-height: 6vw;
+}
+.orderInfo .orderInfoMiddle{
+	margin-left: 4vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    border-bottom: 1px solid #eaeaec;
+    font-size: 4vw;
+}
+.orderInfo .orderInfoMiddle div{
+	height: 5vw;
+	line-height: 5vw;
+}
+.orderInfo .orderInfoBottom{
+    margin-left: 4vw;
+    padding-top: 4vw;
+    padding-bottom: 6vw;
+    font-size: 5vw;
+}
+
+.orderTime{
+    background-color: white;
+    margin-top: 2vw;
+    padding-top: 4vw;
+    padding-bottom: 4vw;
+    color: #b1afb2;
+    font-size: 4vw;
+}
+.orderTime div{
+    margin-left: 4vw;
+    height: 6vw;
+    line-height: 6vw;
+}
+.footer{
+    height: 16vw;
+    width: 100vw;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #9E9E9E;
+    background-color: white;
+}
+.footer span{
+	width: 24vw;
+    height: 8vw;
+    line-height: 8vw;
+    font-size: 4vw;
+    border: none;
+    border-radius: 4vw;
+    margin-top: 2vw;
+    text-align: center;
+}
+.footer .delOrder{
+	background-color: #eff3f6;
+    color: #878789;
+    float: right;
+    margin-right: 2vw;
+}
+.footer .toPay{
+	background-color: #2196F3;
+    color: white;
+    float: right;
+    margin-right: 6vw;
+    
+}
+</style>
+
+<script type="text/javascript">
+
+//将触摸动作赋值到全局变量，用于下面判断
+var control = "touchstart";
+var loosen  = "touchend";
+
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  	
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}();  
+
+function imgCenter(){
+	
+	//调整照片取中间部分
+	var img = document.getElementById("img_id");
+   	var image = new Image();
+		image.src = $("#img_id").attr("src");
+    var realWidth = 0;//储存图片实际宽度
+    var realHeight = 0;//储存图片实际高度
+    var o = document.getElementById("imgDiv");
+    var h = o.offsetHeight; //高度
+    var w = o.offsetWidth; //宽度
+    image.onload = function () {
+        realWidth = image.width;//获取图片实际宽度
+        realHeight = image.height;//获取图片实际高度
+        //让img的宽高相当于图片实际宽高的等比缩放，然后再偏移
+        if (realWidth > realHeight){
+            img.width = (h/realHeight)*realWidth;//等比缩放宽度
+            img.height = h;//跟div高度一致
+            img.style.left = '-' + ((h/realHeight)*realWidth-w)/2 + 'px';//设置图片相对自己位置偏移为img标签的宽度-高度的一半
+        }else if (realWidth < realHeight){
+            img.width =w ;//跟div高度一致
+            img.height = (w/realWidth)*realHeight;//等比缩放高度
+            img.style.top = '-' + ((w/realWidth)*realHeight-h)/2 + 'px';//设置图片相对自己位置偏移为img标签的高度-宽度的一半
+        }else {
+            img.width =w ;
+            img.height = h;
+        }
+
+    };
+	
+	
+}
+
+function toOrder(orderId){
+		
+	
+	window.location.href="toOrder?orderId="+orderId;
+	
+}
+
+function delOrder(orderId){
+	
+	if(confirm("确定删除该照片吗？")){
+	
+		$.ajax({
+	        type: "POST",			
+	            url: "${ctx}/main/delOrderByOrderId",
+	            data:"orderId="+orderId,
+	            async: false,
+	            dataType:"text",
+	            success: function (data) {
+	              
+	            	if(data == "1"){
+	    				
+	    				setTimeout(function(){
+	    					window.location.href="toOrderList";
+	            		}, 1000);
+	    				
+	    			}else{
+	    				alert("删除订单失败");
+	    			}
+	            },
+	          	//失败时的函数
+	    		error:function(){
+	    			alert("删除订单失败");
+	    		}	
+	      });
+		
+	}
+	
+}
+
+function show_time(){
+	
+	
+	var time_start = new Date().getTime(); //设定当前时间
+	var time_end = ${map.order.orderTime}+${payCloseTime}*60*60*1000; //设定目标时间
+	// 计算时间差
+	var time_distance = time_end - time_start;
+	
+	
+	
+	// 天
+	var int_day = Math.floor(time_distance/86400000)
+	time_distance -= int_day * 86400000;
+	// 时
+	var int_hour = Math.floor(time_distance/3600000)
+	time_distance -= int_hour * 3600000;
+	// 分
+	var int_minute = Math.floor(time_distance/60000)
+	time_distance -= int_minute * 60000;
+	// 秒
+	var int_second = Math.floor(time_distance/1000)
+	// 时分秒为单数时、前面加零
+	if(int_day < 10){
+	int_day = "0" + int_day;
+	}
+	if(int_hour < 10){
+	int_hour = "0" + int_hour;
+	}
+	if(int_minute < 10){
+	int_minute = "0" + int_minute;
+	}
+	if(int_second < 10){
+	int_second = "0" + int_second;
+	}
+	
+	// 显示时间
+	 
+	
+	
+	$("#time_h").text(int_hour);
+	$("#time_m").text(int_minute);
+	$("#time_s").text(int_second); 
+	
+	if(time_end - time_start <= 0){
+		
+		setTimeout(function(){
+			window.location.reload();
+		}, 1000);
+		
+	}else{
+		// 设置定时器
+		setTimeout("show_time()",1000);
+	}
+	
+	
+}
+
+$(function(){
+	
+	//判断如果是pc端则将触摸动作改为点击动作
+	if(os.isPc){
+		control = "mousedown";
+		loosen  = "mouseup";
+	}
+	
+	if(0 == ${map.order.status}){
+		show_time();
+	}
+	
+	
+})
+
+
+
+	
+	
+
+</script>
+
+</head>
+
+<body>
+	
+
+    	<div class="orderStatus">
+			 <div class="orderStatusTop">
+			 	<#if map.order.status == 2>
+   					<span style="font-size: 5vw">已发货</span><br>
+			 	<#elseif map.order.status == 1>
+   					<span style="font-size: 5vw">已付款</span><br>
+   				<#elseif map.order.status == 0>
+   					<span style="font-size: 5vw">待付款</span><br>  
+			 		<span style="font-size: 3vw">剩<font id="time_h"></font>小时
+			 		<font id="time_m"></font>分<font id="time_s"></font>秒
+			 		自动关闭订单</span>
+   				<#elseif map.order.status == -1>
+   					<span style="font-size: 5vw">交易关闭</span><br>
+   				</#if>
+			 </div>
+			 <div class="orderStatusBottom">
+			 	<div class="orderStatusMan">
+			 		<span>收货人：${map.site.name}</span>
+			 		<span style="float: right;margin-right: 4vw;">${map.site.phone}</span>
+			 	</div>
+			 	<div class="orderStatusSite">
+			 		收货地址：${map.site.site}
+			 	</div>
+			 </div>   	
+    	</div>
+    		
+    	<div class="orderInfo">
+    		<div class="orderInfoTop">
+    			<div class="imgDiv" id="imgDiv">
+    				<img id="img_id" class="img_id" alt="" src="../../${map.order.firstPhoto}">
+    			</div>
+    			<div class="orderInfoPrice">
+   					<span>￥${map.order.money}</span><br>
+   					<span style="display: inline-block;margin-top: 6vw;margin-left: 8vw;">X ${map.order.goodsNum}</span>
+   				</div>
+    			<div class="orderInfoGoods">
+   					<span>${map.goods.goodsName}</span><br>
+   					<span style="font-size: 3vw;color: #b1afb2;">数量:${map.order.photoNum};尺寸:${map.type.typeSize};</span>
+   				</div>
+   				
+    		</div>
+    		<div class="orderInfoMiddle">
+    			<div>
+    				<span>商品总价</span>
+    				<span style="float: right;margin-right: 4vw;">￥${map.order.money*map.order.goodsNum}</span>
+    			</div>
+    			<div>
+    				<span>运费</span>
+    				<span style="float: right;margin-right: 4vw;">￥${map.goods.postage}</span>
+    			</div>
+    		</div>
+    		<div class="orderInfoBottom">
+    			<span>需要付款</span>
+    			<span style="float: right;margin-right: 4vw;color: #f25a2a;">￥${map.order.money*map.order.goodsNum+map.goods.postage}</span>
+    		</div>
+    	</div>	
+    		
+    		
+    		
+    	<div class="orderTime">
+    		<div>订单编号：${map.order.orderId}</div>
+    		<div>下单时间：${map.order.orderTime?number?number_to_datetime} </div>
+    	</div>		
+	
+		<div class="footer">
+			<#if map.order.status ==0>
+				<span class="toPay" onclick="toOrder('${map.order.orderId}')">去付款</span>
+				<span class="delOrder" onclick="delOrder('${map.order.orderId}')">删除订单</span>
+			<#elseif map.order.status == -1>
+				<span class="delOrder" onclick="delOrder('${map.order.orderId}')">删除订单</span>
+			</#if>
+			
+    	</div>
+
+</body>
+</html>
+
+

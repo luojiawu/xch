@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.pgy.mapper.MTemplateBookMapper">
+	
+	
+	
+	
+	
+	
+	
+	<select id="getMTemplateBookList" resultMap="mTemplateBookBaseResultMap">
+		
+		select * from m_templateBook
+		
+	</select>
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="mTemplateBookBaseResultMap" type="m_templateBook" autoMapping="true"></resultMap>
+	
+</mapper>

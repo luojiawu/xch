@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>地址</title>
+<script src="${ctx}/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/checkbox.css" />
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.content div{
+	background-color: white;
+    height: 14vw;
+    font-size: 4vw;
+    line-height: 14vw;
+    border-bottom: solid 1px #c3c3c3;
+    padding-left: 4vw;
+    overflow: hidden;
+}
+.content div input{
+	display: inline-block;
+	border-style:none;
+	font-size: 4vw;
+	width: 60vw;
+}
+.content div textarea{
+	border: none;
+	font-size:4vw;
+	resize : none;
+	vertical-align:text-top;
+	outline: none;
+	border-radius: 1vw;
+	width: 68vw;
+}
+
+#addSite{
+	width: 90vw;
+    border: none;
+    height: 10vw;
+    color: white;
+    background-color: #2196F3;
+    border-radius: 1vw;
+    margin: 0 auto;
+    display: inherit;
+    font-size: 5vw;
+    margin-top: 6vw;
+}
+
+
+
+</style>
+
+<script type="text/javascript">
+
+//将触摸动作赋值到全局变量，用于下面判断
+var control = "touchstart";
+var loosen  = "touchend";
+
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}();  
+
+$(function(){
+	//判断如果是pc端则将触摸动作改为点击动作
+	if(os.isPc){
+		control = "mousedown";
+		loosen  = "mouseup";
+	}
+	
+	/* $("#addSite").on(loosen,function(){
+		
+		var base = "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";
+		
+		var data = "imgInfo=";
+		
+		$.ajax({
+			type: "POST",
+	        url: "https://api1.sppxw.com/ImgDo/ApiYw.aspx",
+	        data:data,
+	        async: false,
+	        dataType:"text",
+	        success: function (data) {
+	        	
+	        	if(data == "1"){
+	        		
+	        		
+	        		
+	        	}
+	        	
+	        }	
+	    });  
+		
+		
+	}) */
+	
+	$("#addSite").on(loosen,function(){
+		
+		var siteId = $("#siteId").val();
+		var name = $("#name").val();
+		var phone = $("#phone").val();
+		var site = $("#site").val();
+		var checkbox = $("#checkbox input").is(':checked');
+		
+		var pattern = /^1[34578]\d{9}$/;
+        
+		
+		//提交前的验证
+		if(name == ""){
+			alert("请输入姓名");
+		}else if(!pattern.test(phone)){
+			alert("请输入正确的联系电话");
+		}else if(site == ""){
+			alert("请输入地址");
+		}else{
+			checkbox = checkbox?1:0;
+			addAndReplaceSite(siteId,name,phone,site,checkbox);	
+		}
+		
+		
+		
+		
+		
+	});
+	
+	$(".chk_3").on(loosen,function(){
+		
+		
+		if($("#checkbox input").is(':checked')){
+			$("#checkbox input").prop("checked", false);
+		}else{
+			$("#checkbox input").prop("checked", true);
+		}
+		
+		
+	});
+	
+	
+	function addAndReplaceSite(siteId,name,phone,site,defaultStatus){
+		var checkedSiteId = ${checkedSiteId};
+		var data = {"siteId":siteId,"name":name,"phone":phone,"site":site,"defaultStatus":defaultStatus,"orderId":"${orderId}","checkedSiteId":checkedSiteId};
+		
+		$.ajax({
+			type: "POST",
+	        url: "${ctx}/main/addAndReplaceSite",
+	        data:data,
+	        async: false,
+	        dataType:"text",
+	        success: function (data) {
+	        	
+	        	if(data == "1"){
+	        		
+	        		if(checkedSiteId == 0){
+	        			window.location.href="toOrder?orderId=${orderId}";
+	        		}else{
+	        			
+	        			window.location.href="toSiteList?orderId=${orderId}&checkedSiteId=${checkedSiteId}";
+	        			
+	        		}
+	        		
+	        	}
+	        	
+	        }	
+	    });  
+	}
+	
+	
+})
+
+
+	
+	
+
+</script>
+
+</head>
+
+<body>
+	<div data-role="page" id="page">
+		<div data-role="main" class="main-page">
+
+    	<div class="content">
+    	
+    		<#if site??>
+    			<input type="hidden" id="siteId" value="${site.siteId}"/>
+    			<div >
+	    			<span style="margin-right: 10vw;">姓名</span><input type="text" id="name" value="${site.name}" placeholder="请输入姓名"/>
+	    		</div>
+	    		<div >
+	    			<span style="margin-right: 10vw;">电话</span><input type="tel" id="phone" value="${site.phone}" placeholder="请输入联系电话"/>
+	    		</div>
+	    		<div style="height: 18vw;">
+	    			<span style="margin-right: 1vw;">详细地址</span>
+	    			<textarea rows="3" id="site" placeholder="请输入详细的乡镇、街道、小区、楼栋号、单元、门牌号等">${site.site}</textarea>
+	    		</div>
+	    		
+	    		<div id="checkbox">
+	    			<span>设置为默认地址</span>
+	    			<#if checkbox == 1>
+	    				<input type="checkbox" id="checkbox_c2" class="chk_3" checked /><label for="checkbox_c2"></label>
+	    			<#else>
+	    				<input type="checkbox" id="checkbox_c2" class="chk_3"/><label for="checkbox_c2"></label>
+	    			</#if>
+	    			
+	    		</div>
+    		<#else>
+    			<input type="hidden" id="siteId" value="0"/>
+				<div >
+	    			<span style="margin-right: 10vw;">姓名</span><input type="text" id="name" placeholder="请输入姓名"/>
+	    		</div>
+	    		<div >
+	    			<span style="margin-right: 10vw;">电话</span><input type="text" id="phone" placeholder="请输入联系电话"/>
+	    		</div>
+	    		<div style="height: 18vw;">
+	    			<span style="margin-right: 1vw;">详细地址</span>
+	    			<textarea rows="3" id="site" placeholder="请输入详细的乡镇、街道、小区、楼栋号、单元、门牌号等"></textarea>
+	    		</div>
+	    		
+	    		<div id="checkbox">
+	    			<span>设置为默认地址</span>
+	    			<input type="checkbox" id="checkbox_c2" class="chk_3" checked/><label for="checkbox_c2"></label>
+	    		</div>
+    		</#if>
+    		
+    		
+    	</div>
+    	
+    		
+    	
+    	<div class="footer">
+    		<button id="addSite">保存</button>
+    		
+		</div>
+		
+    	
+    	
+    	
+    	</div>
+    	
+    </div>
+
+</body>
+</html>
+
+

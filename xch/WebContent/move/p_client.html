@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>忆我客户</title>
+<script src="${ctx}/js/jquery.js"></script>
+			 
+<script src="http://res2.wx.qq.com/open/js/jweixin-1.4.0.js "></script>
+
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #fff5f2;
+}
+.header{
+	padding: 6vw 5vw;
+    height: 12vw;
+    background-color: white;
+}
+.header .typeDiv{
+	float: left;
+    width: 22vw;
+    height:10vw;
+    font-size: 4vw;
+    color: #35454c;
+    text-align: center;
+}
+.header .typeDiv .numSpan{
+	color: #F44336;
+}
+.setRemind{
+    float: left;
+    height: 10vw;
+    border-left: 1px solid #9E9E9E;
+    padding-left: 8vw;
+    font-size: 4vw;
+    color: #1770b7;
+}
+
+.centent{
+	margin: 8vw 5vw;
+}
+.centent h4{
+	text-align: center;
+}
+.centent .gridtable{
+	margin-top:5vw;
+	color:#56596a;
+	font-size: 4vw;
+	border-collapse: collapse;
+	text-align: center;
+}
+.centent .gridtable th{
+	border: 1px solid #56596a;
+	width: 24vw;
+	height: 10vw;
+}
+.centent .gridtable td{
+	border: 1px solid #56596a;
+	height: 10vw;
+}
+
+
+#hideBackground{display:none;background-color: rgba(0, 0, 0, 0.42);width: 100vw;height: 100vh;position:fixed;top:0;z-index: 9999;}
+#hideBackground .blankDiv{
+	height: 18vh;
+}
+#hideBackground .blankDiv img{
+    width: 6vw;
+    margin-top: 12vh;
+    margin-left: 84vw;
+}
+#hideBackground .hideDiv{
+	background-color: white;
+    padding: 14vw 0;
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 2vw;
+}
+#hideBackground .hideDiv .gridtable{
+	color: #56596a;
+    font-size: 4vw;
+    border-collapse: collapse;
+    text-align: center;
+    margin-left: 4vw;
+}
+#hideBackground .hideDiv .gridtable th{
+	border: 1px solid #56596a;
+	width: 14vw;
+	height: 10vw;
+}
+#hideBackground .hideDiv .gridtable td{
+	border: 1px solid #56596a;
+	height: 10vw;
+}
+
+</style>
+
+<script type="text/javascript">
+
+
+
+</script>
+
+</head>
+<body>  
+	<div class="header">	
+		<div class="typeDiv" id="readBtn">
+			<span class="numSpan" id="readNum"></span><br>
+			<span>阅读总数</span>
+		</div>
+		<div class="typeDiv" id="shareBtn">
+			<span class="numSpan">${map.shareNum}</span><br>
+			<span>分享总数</span>
+		</div>
+		<div class="typeDiv"  id="clientBtn">
+			<span class="numSpan">${map.userNum}</span><br>
+			<span>准客户</span>
+		</div>
+		
+		<div class="setRemind">
+			提醒<br>
+			设置
+		</div>
+		
+	</div>
+	<div class="centent">
+		<h4>阅读详情</h4>
+		<table class="gridtable">
+			
+		</table>
+	</div>
+	
+	<!--默认隐藏 -->
+	<div id="hideBackground"> 
+		<div class="blankDiv" id="blankDiv">
+		<img alt="取消按钮" src="${ctx}/img/X.png">
+		</div>
+		<div class="hideDiv">
+			<table class="gridtable">
+			
+			</table>
+		</div>
+	</div>
+	
+<script>
+
+  function getReadData(){
+	  
+	  //阅读总数
+  	  var rNum = 0;
+	  //单篇文章阅读总数
+	  var userReadNum;
+	  var data = {"openId":"${openId}","dataType":1};
+	  $.ajax({
+			type: "POST",
+	        url: "${ctx}/p/getClientData",
+	        data:data,
+	        async: false,
+	        dataType:"json",
+	        success: function (data) {
+	        	
+	        	if(data.code == 1){
+	        		$(".centent .gridtable").empty();
+	        		var tr = $("<tr/>");
+	        		$("<th/>").text("序号").css("width","10vw").appendTo(tr);
+		        	$("<th/>").text("文章").appendTo(tr);
+		        	$("<th/>").text("阅读数").css("width","14vw").appendTo(tr);
+		        	$("<th/>").text("用户").appendTo(tr);
+		        	tr.appendTo($(".centent .gridtable"));
+		        	$.each(data.dataList,function(i,item){
+		        		var tr = $("<tr/>");
+		        		userReadNum = item.userRead.length;
+		        		var anaId = item.anaId;
+		        		var anaName = item.anaName;
+						var readNum = item.readNum;
+						
+						//如果用户数据不等于空，循环生成
+						if(userReadNum>0 && userReadNum<3){
+							$("<td/>").text(i+1).attr("rowspan",userReadNum).appendTo(tr);
+							var td = $("<td/>");
+							$("<a href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1e5a15fc07a1433&redirect_uri=http://move.ehai.xyz/photobook/p/toPositive?anaId="+anaId+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect'>"+anaName+"</a>").appendTo(td);
+							td.attr("rowspan",userReadNum).appendTo(tr);
+							$("<td/>").text(readNum).attr("rowspan",userReadNum).appendTo(tr);
+							for(var u in item.userRead){
+								if(u>0){
+									var tr = $("<tr/>");
+								}
+								var userRead = item.userRead[u];
+								var td = $("<td/>");
+								$("<img style='width:6vw;border-radius: 2vw;vertical-align: bottom;margin-right: 2vw;' src='"+userRead.user.headimgurl+"'>").appendTo(td);
+								$("<span/>").text(userRead.user.nickname+userRead.count+"次").appendTo(td);
+								
+								  
+								td.appendTo(tr);
+								tr.appendTo($(".centent .gridtable"));
+								
+							}
+							
+							rNum += readNum;
+							
+						}else if(userReadNum >= 3){
+							$("<td/>").text(i+1).appendTo(tr);
+							var td = $("<td/>");
+							$("<a href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1e5a15fc07a1433&redirect_uri=http://move.ehai.xyz/photobook/p/toPositive?anaId="+anaId+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect'>"+anaName+"</a>").appendTo(td);
+							td.appendTo(tr);
+							$("<td/>").text(readNum).appendTo(tr);
+							var td_span = $("<td/>");
+							$("<span/>").text("用户太多，请点击查看").attr("onclick","lookUser("+anaId+")").css("text-decoration","underline").appendTo(td_span);
+							td_span.appendTo(tr);
+							tr.appendTo($(".centent .gridtable"));
+						}else{
+							$("<td/>").text(i+1).appendTo(tr);
+							var td = $("<td/>");
+							$("<a href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1e5a15fc07a1433&redirect_uri=http://move.ehai.xyz/photobook/p/toPositive?anaId="+anaId+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect'>"+anaName+"</a>").appendTo(td);
+							td.appendTo(tr);
+							$("<td/>").text(readNum).appendTo(tr);
+							$("<td/>").text("").appendTo(tr);
+							tr.appendTo($(".centent .gridtable"));
+						}
+						
+						
+						
+					}); 
+		        	
+		        	
+		        	$("#readNum").text(rNum);
+	        	}else {
+					alert("无记录");
+				}
+	        	
+	        	
+	        }
+		  });
+	  
+	  
+	  
+  }
+  
+  function getShareData(){
+	  
+	  var userShareNum;
+	  var data = {"openId":"${openId}","dataType":2};
+	  $.ajax({
+			type: "POST",
+	        url: "${ctx}/p/getClientData",
+	        data:data,
+	        async: false,
+	        dataType:"json",
+	        success: function (data) {
+	        	
+	        	if(data.code == 1){
+	        		$(".centent .gridtable").empty();
+	        		var tr = $("<tr/>");
+	        		$("<th/>").text("序号").css("width","10vw").appendTo(tr);
+		        	$("<th/>").text("文章").appendTo(tr);
+		        	$("<th/>").text("分享数").css("width","14vw").appendTo(tr);
+		        	$("<th/>").text("用户").appendTo(tr);
+		        	tr.appendTo($(".centent .gridtable"));
+		        	$.each(data.dataList,function(i,item){
+		        		var tr = $("<tr/>");
+		        		userShareNum = item.userShare.length;
+		        		var anaId = item.anaId;
+		        		var anaName = item.anaName;
+						var readNum = item.readNum;
+						
+						//如果用户数据不等于空，循环生成
+						if(userShareNum>0){
+							$("<td/>").text(i+1).attr("rowspan",userShareNum).appendTo(tr);
+							var td = $("<td/>");
+							$("<a href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1e5a15fc07a1433&redirect_uri=http://move.ehai.xyz/photobook/p/toPositive?anaId="+anaId+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect'>"+anaName+"</a>").appendTo(td);
+							td.attr("rowspan",userShareNum).appendTo(tr);
+							$("<td/>").text(readNum).attr("rowspan",userShareNum).appendTo(tr);
+							for(var u in item.userShare){
+								if(u>0){
+									var tr = $("<tr/>");
+								}
+								var userShare = item.userShare[u];
+								var td = $("<td/>");
+								$("<img style='width:6vw;border-radius: 2vw;vertical-align: bottom;margin-right: 2vw;' src='"+userShare.headimgurl+"'>").appendTo(td);
+								$("<span/>").text(userShare.nickname).appendTo(td);
+								
+								
+								td.appendTo(tr);
+								tr.appendTo($(".centent .gridtable"));
+								
+							}
+							
+							
+						}else{
+							$("<td/>").text(i+1).appendTo(tr);
+							var td = $("<td/>");
+							$("<a href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxe1e5a15fc07a1433&redirect_uri=http://move.ehai.xyz/photobook/p/toPositive?anaId="+anaId+"&response_type=code&scope=snsapi_userinfo&connect_redirect=1#wechat_redirect'>"+anaName+"</a>").appendTo(td);
+							td.appendTo(tr);
+							$("<td/>").text(readNum).appendTo(tr);
+							$("<td/>").text("").appendTo(tr);
+							tr.appendTo($(".centent .gridtable"));
+						}
+						
+						
+						
+					}); 
+	        		
+	        		
+	        	}else {
+					alert("无记录");
+				}
+	        	
+	        	
+	        }
+		  });
+	  
+	  
+	  
+  }
+  
+  function getClientDate(){
+	  
+	  var data = {"openId":"${openId}","dataType":3};
+	  $.ajax({
+			type: "POST",
+	        url: "${ctx}/p/getClientData",
+	        data:data,
+	        async: false,
+	        dataType:"json",
+	        success: function (data) {
+	        	
+	        	if(data.code == 1){
+	        		$(".centent .gridtable").empty();
+	        		var tr = $("<tr/>");
+	        		$("<th/>").text("序号").appendTo(tr);
+		        	$("<th/>").text("用户").css("width","50vw").appendTo(tr);
+		        	tr.appendTo($(".centent .gridtable"));
+		        	$.each(data.dataList,function(i,item){
+		        		var tr = $("<tr/>");
+						$("<td/>").text(i+1).appendTo(tr);
+						var td = $("<td/>");
+						$("<img style='width:6vw;border-radius: 2vw;vertical-align: bottom;margin-right: 2vw;' src='"+item.headimgurl+"'>").appendTo(td);
+						$("<span/>").text(item.nickname).appendTo(td);
+						td.appendTo(tr);
+						tr.appendTo($(".centent .gridtable"));
+						
+						
+					}); 
+	        		
+	        		
+	        	}else {
+					alert("无记录");
+				}
+	        	
+	        	
+	        }
+		  });
+	  
+	  
+	  
+  }
+  
+  function lookUser(anaId){
+	  
+	  $.ajax({
+			type: "POST",
+	        url: "${ctx}/p/getReadLogByAnaId",
+	        data:"anaId="+anaId,
+	        async: false,
+	        dataType:"json",
+	        success: function (data) {
+	        	
+	        	if(data.code == 1){
+	        		
+	        		
+	        		
+	        		$(".hideDiv .gridtable").empty();
+	        		var tr = $("<tr/>");
+	        		$("<th/>").text("序号").appendTo(tr);
+		        	$("<th/>").text("用户").css("width","56vw").appendTo(tr);
+		        	tr.appendTo($(".hideDiv .gridtable"));
+		        	$.each(data.userRead,function(i,item){
+		        		var tr = $("<tr/>");
+						$("<td/>").text(i+1).appendTo(tr);
+						var td = $("<td/>");
+						$("<img style='width:6vw;border-radius: 2vw;vertical-align: bottom;margin-right: 2vw;' src='"+item.user.headimgurl+"'>").appendTo(td);
+						$("<span/>").text(item.user.nickname+item.count+"次").appendTo(td);
+						
+						td.appendTo(tr);
+						tr.appendTo($(".hideDiv .gridtable"));
+						
+					}); 
+	        		$("#hideBackground").show("1200");
+	        	}else {
+					alert("获取用户失败");
+				}
+	        	
+	        	
+	        }
+		  });
+	  
+  }
+  
+  $(function(){
+	  
+	  getReadData();
+	  
+	  $("#readBtn").on("click",function(){
+		  
+		  $(".centent h4").text("阅读详情");
+		  
+		  getReadData();
+	  })
+	  
+	  $("#shareBtn").on("click",function(){
+		  
+		  $(".centent h4").text("分享详情");
+		  
+		  getShareData();
+	  })
+	  
+	  $("#clientBtn").on("click",function(){
+		  
+		  $(".centent h4").text("准客户详情");
+		  
+		  getClientDate();
+	  })
+	  
+	  $("#hideBackground .blankDiv img").on("click",function(){
+		
+		  $("#hideBackground").hide("800");
+		  
+	  })
+	  
+  })
+   
+   
+</script>
+	
+	
+</body>
+</html>

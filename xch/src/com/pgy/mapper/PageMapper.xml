@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+<mapper namespace="com.pgy.mapper.PageMapper">
+	
+	
+	<select id="getGoodsList" resultMap="goodsBaseResultMap">
+		
+		select * from p_goods;
+		
+	</select>
+	
+	
+	
+	<select id="getGoodsById" resultMap="goodsBaseResultMap">
+		
+		select * from p_goods where goodsId = #{goodsId};
+		
+	</select>
+	
+	<select id="getTypeByIds" resultMap="typeBaseResultMap">
+		
+		select * from p_type where typeId in
+		
+		<foreach collection="array" open="(" separator="," close=")" item="typeIds">
+            #{typeIds}
+    	</foreach>
+		
+		
+	</select>
+	
+	
+	
+	
+	
+	<!-- 定义ResultMap -->
+	<resultMap id="goodsBaseResultMap" type="goods" autoMapping="true"></resultMap>
+	<resultMap id="typeBaseResultMap" type="type" autoMapping="true"></resultMap>
+	
+</mapper>

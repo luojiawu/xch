@@ -1,0 +1,103 @@
+
+<!DOCTYPE HTML>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="${ctx}/assets/css/dpl-min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/assets/css/bui-min.css" rel="stylesheet" type="text/css" />
+    <link href="${ctx}/assets/css/main-min.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="${ctx}/js/jquery.js"></script>
+    <script type="text/javascript" src="${ctx}/js/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="${ctx}/assets/js/bui-min.js"></script>
+    <script type="text/javascript" src="${ctx}/assets/js/config-min.js"></script>
+    <script type="text/javascript" src="${ctx}/assets/js/common/main.js"></script>
+    
+    <script src="${ctx}/js/artDialog-6.0.2/dist/dialog-min.js"></script>
+	<link rel="stylesheet" href="${ctx}/js/artDialog-6.0.2/css/ui-dialog.css">
+	<script>
+	BUI.use('common/main',function(){
+        var config = [
+                      {id:'1',//唯一标识符id
+                    	  homePage:'11',//当前限时的菜单id
+                    	  menu:[{text:'系统管理',//主菜单
+                    		  items:[
+  	                            	 {id:'11',text:'订单管理',href:'${ctx}/admin/orderList'}
+                                     ]}]},
+                       {id:'2',
+                           homePage : '21',
+                           menu:[{text:'文章管理',
+                           items:[
+                                  {id:'21',text:'新增文章',href:'${ctx}/admin/toArticle?ArtID=0'},
+                                  {id:'22',text:'文章列表',href:'${ctx}/admin/toArticleList'}
+                                  ]}]}];
+        new PageUtil.MainPage({
+            modulesConfig : config
+        });
+    });
+    
+    $(function(){
+    	$(".dl-log-quit").click(function(){
+    		var d = dialog({
+					title: '温馨提示',
+				    content: '<font size=6 color=#43aebe>您确定退出系统吗？</font>',
+					okValue:'确定',
+					ok:function(){
+						this.title("请稍等");
+						window.location="${ctx}/admin/logout";
+						return false;
+					},
+				    cancelValue:'取消',
+				    //用于隐藏 什么都不写就自动隐藏
+				    cancel:function(){}
+    			});
+    			//表示弹出对话框，showModal表示出现该对话框则不能点其他
+				d.showModal();
+				
+		});
+    	
+    	$("#articleBtn").click(function(){
+    		
+    		alert("测试");
+    		
+    	})
+    });
+</script>
+
+</head>
+<body>
+
+<div class="header">
+
+    <div class="dl-title">
+        <img src="${ctx}/assets/img/top.png">
+    </div>
+
+    <div class="dl-log">欢迎您，<span class="dl-log-user">
+    <a href="javascript:;" title="退出系统" class="dl-log-quit">退出</a>
+    </div>
+</div>
+<div class="content">
+    <div class="dl-main-nav">
+        <div class="dl-inform"><div class="dl-inform-title"><s class="dl-inform-icon dl-up"></s></div></div>
+        <ul id="J_Nav"  class="nav-list ks-clear">
+            <li class="nav-item dl-selected">
+            <div class="nav-item-inner nav-home">系统管理</div>
+            </li>		
+			<li class="nav-item dl-selected">
+            <div id="articleBtn" class="nav-item-inner nav-order">业务管理</div>
+            </li>
+        </ul>
+    </div>
+    <ul id="J_NavContent" class="dl-tab-conten">
+
+    </ul>
+</div>
+
+
+<div style="text-align:center;">
+<p></p>
+</div>
+</body>
+</html>

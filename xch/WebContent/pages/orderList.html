@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>订单列表</title>
+<link rel="stylesheet" type="text/css" href="${ctx}/css/checkbox.css" />
+<script src="${ctx}/js/jquery.js"></script>
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body{
+	background-color: #efecec;
+}
+
+.content .orderDiv{
+	height: 46vw;
+    font-size: 4vw;
+    color: #b9b9b9;
+    margin-bottom: 2vw;
+    background-color: white;
+}
+.content .orderDiv>span{
+	float: right;
+    margin-top: 3vw;
+    margin-right: 4vw;
+    width: 22vw;
+    height: 8vw;
+    line-height: 8vw;
+    font-size: 4vw;
+    text-align: center;
+    background-color: #ececec;
+    border-radius: 4vw;
+}
+.content .orderDiv .orderContent{
+	border-bottom: solid 1px #dcdada; 
+	height: 32vw;
+}
+.content .orderDiv .orderContent .dateDiv{
+	height: 8vw;
+    line-height: 8vw;
+    text-indent: 4vw;
+}
+.content .orderDiv .orderContent .dateDiv>span{
+	float: right;
+    margin-right: 4vw;
+    color: #3e8bdd;
+}
+
+.content .orderDiv .orderContent .orderDetails{
+	background-color: #f9f9f9;
+    height: 10vw;
+    padding: 2vw 4vw 2vw 4vw;
+}
+
+.content .orderDiv .orderContent .orderDetails #imgDiv{
+	width: 20vw;
+	height: 10vw;
+	overflow:hidden;
+	display: inline-block;
+	text-align: center;
+	
+}
+.content .orderDiv .orderContent .orderDetails .img_id{
+	position: relative;
+}
+.content .orderDiv .orderContent .orderDetails div{
+	display: inline-block;
+	font-size: 4vw;
+}
+.content .orderDiv .orderContent .orderDetails .leftDetails{
+	margin-left: 2vw;
+}
+.content .orderDiv .orderContent .orderDetails .rightDetails{
+	float: right;
+	margin-top:3vw; 
+}
+.content .orderDiv .orderContent .moneyDiv{
+    text-align: right;
+    padding-right: 10vw;
+    height: 10vw;
+    line-height: 10vw;
+}
+
+
+
+
+</style>
+
+<script type="text/javascript">
+
+function toOrder(orderId){
+		
+	
+	window.location.href="toOrder?orderId="+orderId;
+	
+}
+
+function imgCenter(){
+	
+	$(".orderDiv").each(function () {
+		var img = $(this).find(".img_id");
+		
+		var src = $(this).find(".img_id").attr("src");
+		var image = new Image();
+		image.src = src;
+	    var realWidth = 0;//储存图片实际宽度
+	    var realHeight = 0;//储存图片实际高度
+	    var o = document.getElementById("imgDiv");
+	    var h = o.offsetHeight; //高度
+	    var w = o.offsetWidth; //宽度
+	    image.onload = function () {
+	        realWidth = image.width;//获取图片实际宽度
+	        realHeight = image.height;//获取图片实际高度
+	        //让img的宽高相当于图片实际宽高的等比缩放，然后再偏移
+	        if (realWidth > realHeight){
+	            img.css("width",(h/realHeight)*realWidth);//等比缩放宽度
+	            img.css("height",h);//跟div高度一致
+	            img.css("left",'-' + ((h/realHeight)*realWidth-w)/2 + 'px');//设置图片相对自己位置偏移为img标签的宽度-高度的一半
+	        }else if (realWidth < realHeight){
+	            img.css("width",w);//跟div高度一致
+	            img.css("height",(w/realWidth)*realHeight);//等比缩放高度
+	            img.css("top",'-' + ((w/realWidth)*realHeight-h)/2 + 'px');//设置图片相对自己位置偏移为img标签的高度-宽度的一半
+	        }else {
+	            img.width =w ;
+	            img.height = h;
+	        }
+	
+	    }; 
+		
+	}) 
+	
+}
+
+function toOrderDetails(orderId){
+	window.location.href="toOrderDetails?orderId="+orderId;
+}
+
+function delOrder(orderId){
+	
+	if(confirm("确定删除该照片吗？")){
+	
+		$.ajax({
+	        type: "POST",			
+	            url: "${ctx}/main/delOrderByOrderId",
+	            data:"orderId="+orderId,
+	            async: false,
+	            dataType:"text",
+	            success: function (data) {
+	              
+	            	if(data == "1"){
+	    				
+	    				setTimeout(function(){
+	    					window.location.reload();
+	            		}, 1000);
+	    				
+	    			}else{
+	    				alert("删除订单失败");
+	    			}
+	            },
+	          	//失败时的函数
+	    		error:function(){
+	    			alert("删除订单失败");
+	    		}	
+	      });
+		
+	}
+	
+}
+
+$(function(){
+	
+	imgCenter();
+	
+})
+
+</script>
+
+</head>
+
+<body>
+	
+
+    	<div class="content">
+    		<#list orderList as order>
+    		<div class="orderDiv">
+    			<div class="orderContent">
+    				<div class="dateDiv">${order.orderTime?substring(0,10)} 
+    				<#if order.status == 2>
+    					<span>已发货</span>
+    				<#elseif order.status == 1>
+    					<span>已付款</span>
+    				<#elseif order.status == 0>
+    					<span>待付款</span>
+    				<#elseif order.status == -1>
+    					<span>交易关闭</span>	
+    				</#if>
+    				</div>
+    				<div class="orderDetails" onclick="toOrderDetails('${order.orderId}')">
+    					<div id="imgDiv" >
+    						<img id="img_id" class="img_id" alt="" src="../../${order.firstPhoto}">
+    					</div>
+    					<div class="leftDetails">
+    						<span style="color: black;font-size: 4vw">${order.goods.goodsName}</span><br>
+    						<span style="font-size: 3vw">数量：${order.photoNum}张;尺寸：${order.type.typeSize}</span>
+    					</div>
+    					<div class="rightDetails">
+    						X 1
+    					</div>
+    					
+    				</div>
+    				<div class="moneyDiv">
+    					<#if order.payMoney == 0>
+	    					<font style="color: black;">合计：￥${order.money*order.goodsNum+order.goods.postage}元</font>
+	    				<#else>
+	    					<font style="color: black;">合计：￥${order.payMoney}元</font>
+	    				</#if>
+    					
+    				</div>
+    			</div>
+    			<#if order.status == 1>
+    				<span>订单完成</span>
+   				<#elseif order.status == 0>
+   					
+   					<span style="background-color: #bbe3f5;
+    color: #1994f7;" onclick="toOrder('${order.orderId}')">去付款</span>
+   					<span onclick="delOrder('${order.orderId}')">删除订单</span>
+   				<#else>
+   					<span onclick="delOrder('${order.orderId}')">删除订单</span>
+   				</#if>
+    			
+    		</div>
+    		</#list>
+    	</div>
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+
+</body>
+</html>
+
+

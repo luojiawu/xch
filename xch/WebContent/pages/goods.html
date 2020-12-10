@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<#assign ctx=request.contextPath>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;multipart/form-data;charset=UTF-8" />  
+<meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<title>商品详情</title>
+<script src="${ctx}/js/jquery.js"></script>
+<script src="${ctx}/js/jquery.mobile-1.4.5.js"></script> 
+<link rel="stylesheet" href="../css/swiper.min.css">
+<script src="../js/swiper.min.js"></script>
+<style type="text/css">
+*{margin:0;padding:0;}
+input,button,select,textarea{outline:none;}
+.ui-loader-default{ display:none}  
+.ui-mobile-viewport{ border:none;}  
+.ui-page {padding: 0; margin: 0; outline: 0}   
+ul{list-style-type:none;}
+
+body {
+	background-color: #efecec;
+}
+
+
+
+.main-page .header .goodsIntro{
+	margin-bottom: 1vw;
+    background-color: white;
+}
+/* .main-page .header .banner{
+	height: 202px;
+} */
+
+.main-page .goodsIntro{
+	height: 16vw;
+	line-height: 7vw;
+    padding-left: 4vw;
+    padding-top: 2vw;
+    font-size: 4vw;
+}
+
+.main-page .materials{
+	height: 10vw;
+	line-height:10vw;
+	font-size:4vw;
+	margin-bottom: 1vw;
+	padding-left: 4vw;
+	background-color: white;
+}
+.main-page .goodsDetails div{
+	font-size:4vw;
+	padding-left: 4vw;
+	padding-top: 2vw;
+	padding-bottom: 2vw;
+	background-color: white;
+} 
+.main-page .goodsDetails img{
+	width: 100vw;
+	margin-bottom: 16vw;
+}
+
+.main-page .footer{
+    width: 100vw;
+    height: 16vw;
+    position: fixed;
+    bottom: 0;
+    border-top: solid 1px #9E9E9E;
+    background-color: white;
+}
+.main-page .footer button{
+    width: 24vw;
+    height: 8vw;
+    background-color: #2196F3;
+    font-size: 4vw;
+    color: white;
+    float: right;
+    border: none;
+    border-radius: 4vw;
+    margin-top: 2vw;
+    margin-right: 6vw;
+}
+
+#typeBackground{background-color: rgba(0, 0, 0, 0.42);width: 100vw;height: 100vh;position:fixed;top:0;z-index: 9999;}
+#typeBackground .blankDiv{
+	height: 70vh;
+    background-color: rgba(0, 0, 0, 0.42);
+}
+#typeBackground .typeDiv{
+	background-color:white;
+	height: 30vh;
+    width: 100vw;
+}
+#typeBackground .typeDiv .typeHeader{
+	height: 18vh;
+}
+#typeBackground .typeDiv .typeHeader .typeHeaderLeft{
+    width: 36vw;
+    height: 18vh;
+    float: left;
+    font-size: 3vw;
+}
+#typeBackground .typeDiv .typeHeader .typeHeaderLeft div{
+    margin-left: 2vw;
+    height: 8vw;
+    line-height: 8vw;
+}
+#typeBackground .typeDiv .typeHeader .typeHeaderLeft img{
+    width: 30vw;
+    margin-top: 3vw;
+    margin-left: 2vw;
+    border-radius: 1vw;
+}
+#typeBackground .typeDiv .typeHeader .typeHeaderRight{
+	width: 64vw;
+    height: 18vh;
+    line-height: 18vh;
+    float: right;
+    font-size: 4vw;
+}
+#typeBackground .typeDiv .typeCentent{
+	min-height: 6vh;
+}
+
+#typeBackground .typeDiv .typeCentent #typeName{
+	margin-left: 2vw;
+    background-color: #b1a9a9;
+    color: #101010;
+    padding: 1vw 3vw;
+    border-radius: 4vw;
+    font-size: 4vw;
+}
+
+
+#typeBackground .typeDiv .typeBtn{
+	background-color: #157ed2;
+    color: white;
+    font-size: 6vw;
+    text-align: center;
+    height: 6vh;
+    line-height: 6vh;
+}
+
+/* .swiper-container {
+    width: 100%;
+} */
+.swiper-slide {
+    overflow: hidden;
+}
+
+.banner2 .swiper-container {
+    width: 100%;
+    height: 300px;
+    margin: 20px auto;
+}
+    
+.banner2 .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}    
+    
+
+</style>
+
+<script type="text/javascript">
+
+//将触摸动作赋值到全局变量，用于下面判断
+var control = "touchstart";
+var loosen  = "click";
+
+var goodsId = ${goods.goodsId};
+var typeId;
+var defaultPaper;
+//判断设备
+var os = function() {  
+     var ua = navigator.userAgent,  
+     isWindowsPhone = /(?:Windows Phone)/.test(ua),  
+     isSymbian = /(?:SymbianOS)/.test(ua) || isWindowsPhone,   
+     isAndroid = /(?:Android)/.test(ua),   
+     isFireFox = /(?:Firefox)/.test(ua),   
+     isChrome = /(?:Chrome|CriOS)/.test(ua),  
+     isTablet = /(?:iPad|PlayBook)/.test(ua) || (isAndroid && !/(?:Mobile)/.test(ua)) || (isFireFox && /(?:Tablet)/.test(ua)),  
+     isPhone = /(?:iPhone)/.test(ua) && !isTablet,  
+     isPc = !isPhone && !isAndroid && !isSymbian;  
+     return {  
+          isTablet: isTablet,  
+          isPhone: isPhone,  
+          isAndroid : isAndroid,  
+          isPc : isPc  
+     };  
+}();  
+
+
+function clickDefaultType(){
+	
+	$("#typeBackground .typeDiv .typeCentent #typeName").first().css({"background-color":"#157ed2","color":"white"});
+	var typeName = $("#typeBackground .typeDiv .typeCentent #typeName").first().text();
+	var defaultPaperVal = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(0)").val();
+	var unitPriceVal = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(1)").val();
+	var defaultPriceVal = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(2)").val();
+	typeId = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(3)").val();
+	var mainImg = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(4)").val();
+	var detailsImg = $("#typeBackground .typeDiv .typeCentent #typeName").first().find("input:eq(5)").val();
+	goodsType(typeName,defaultPaperVal,defaultPriceVal,unitPriceVal,mainImg,detailsImg);
+	
+}
+
+
+function goodsType(typeName,defaultPaperVal,defaultPriceVal,unitPriceVal,mainImg,detailsImg){
+	
+	$("#materials span").text(typeName);
+	
+	if(defaultPaperVal == 0){
+		$("#typeBackground .typeDiv .typeHeader .typeHeaderLeft div").text("选择规格");
+		defaultPaper = defaultPaperVal;
+	}else{
+		$("#typeBackground .typeDiv .typeHeader .typeHeaderLeft div").text(defaultPaperVal+"张");
+		defaultPaper = defaultPaperVal;
+	}
+	
+	if(defaultPriceVal == 0){
+		$("#typeBackground .typeDiv .typeHeader .typeHeaderRight span").text("￥"+unitPriceVal);
+		$(".header .goodsIntro span font").text(unitPriceVal);
+	}else{
+		$("#typeBackground .typeDiv .typeHeader .typeHeaderRight span").text("￥"+defaultPriceVal);
+		$(".header .goodsIntro span font").text(defaultPriceVal);
+	}
+	
+	if(mainImg != null){
+		var arr=new Array();
+		arr = mainImg.split(',');
+		for(var i=0;i<arr.length;i++)
+		{	
+			if(i == 0){
+			$("#typeBackground .typeDiv .typeHeader .typeHeaderLeft img").attr("src","${ctx}/"+arr[i]);	
+			}
+			$(".swiper-slide:eq("+i+") img").attr("src","${ctx}/"+arr[i]); 
+		}
+	}
+	
+	$(".goodsDetails img").attr("src","${ctx}/"+detailsImg);
+	
+	
+}
+
+$(document).on("pagecreate","#page",function(){
+	
+	//判断如果是pc端则将触摸动作改为点击动作
+	if(os.isPc){
+		control = "mousedown";
+		loosen  = "mouseup";
+	}
+	
+	clickDefaultType();
+	
+	$("#toPhotoPage").on(loosen,function(){     
+		
+		/* $.post('toPhotoPage', {"goodsId":goodsId,"typeId":typeId,"defaultPaper":defaultPaper}) */
+		$("#typeBackground").css("display","block");
+		
+		/* window.location.href="toPhotoPage"; */
+	})
+	
+	$("#materials").on(loosen,function(){     
+		
+		$("#typeBackground").css("display","block");
+		
+	})
+	
+	
+	$("#blankDiv,#typeBtn").on(loosen,function(){     
+		
+		$("#typeBackground").css("display","none");
+	})
+	
+	$("#typeBtn").on(loosen,function(){     
+		
+		window.location.href="toPhotoPage?goodsId="+goodsId+"&typeId="+typeId+"&defaultPaper="+defaultPaper;
+		
+	})
+	
+	$("#typeBackground .typeDiv .typeCentent #typeName").on(loosen,function(){     
+		
+		$(this).siblings().css({"background-color":"#b1a9a9","color":"#101010"});
+		$(this).css({"background-color":"#157ed2","color":"white"});
+		var typeName = $(this).text();
+		var defaultPaperVal = $(this).find("input:eq(0)").val();
+		var unitPriceVal = $(this).find("input:eq(1)").val();
+		var defaultPriceVal = $(this).find("input:eq(2)").val();
+		typeId = $(this).find("input:eq(3)").val();
+		var mainImg = $(this).find("input:eq(4)").val();
+		var detailsImg = $(this).find("input:eq(5)").val();
+		goodsType(typeName,defaultPaperVal,defaultPriceVal,unitPriceVal,mainImg,detailsImg);
+	})
+	
+	/*
+	创建Swiper对象，以及因为Swiper的特性，
+	需要隐藏的标签代码需要在创建对象后再执行
+	*/
+	//轮播图滑动对象				  
+	var swiper1 = new Swiper('#banner1', {
+	    zoom: true,
+	    autoplay:2000,
+	    autoplayDisableOnInteraction:false,
+	    pagination: '.swiper-pagination'
+	});
+	//商品类型滑动对象				  
+	var swiper2 = new Swiper('#banner2', {
+        slidesPerView: 2,
+        paginationClickable: true,
+        spaceBetween: 0,
+        freeMode: true
+	});
+	$("#typeBackground").css("display","none");
+	$(".typeDiv .swiper-slide").css({"width":"auto"});
+});
+
+</script>
+
+</head>
+<body>  
+	<div data-role="page" id="page">
+		<div data-role="main" class="main-page">
+			
+    		<div class="header">
+    			<div class="banner">
+    				<div class="swiper-container" id="banner1">
+				        <div class="swiper-wrapper">
+				        	
+				        	<#list goods.typeList[0].mainImgs as mainImgs>
+				        		<div class="swiper-slide">
+					                <div class="swiper-zoom-container">
+					                    <img src="${ctx}/${mainImgs}">
+					                </div>
+					            </div>
+				        	</#list>
+				            
+				        </div>
+				        <!-- Add Pagination -->
+				        <div class="swiper-pagination swiper-pagination-white"></div>
+				        
+				    </div>
+    			</div>
+    			
+				<div class="goodsIntro">
+					<span style="color: #ff1e1e">￥<font style="font-size: 5vw">${goods.goodsPrice}</font></span>起<br>
+					<span style="font-size: 5vw">${goods.goodsName}</span>
+				</div>
+    		</div>
+			<div class="materials" id="materials">
+				已选&nbsp<span style="color: #ff1e1e;"></span>
+			</div>
+			<div class="goodsDetails">
+				<div>商品详情</div>
+				
+				<img alt="" src="">
+				
+			</div>
+			<div class="footer">
+				<button id="toPhotoPage">开始定制</button>
+			</div>
+    		
+    		<!--默认隐藏 -->
+			<div id="typeBackground"> 
+				<div class="blankDiv" id="blankDiv"></div>
+				<div class="typeDiv">
+					<div class="typeHeader">
+						<div class="typeHeaderLeft">
+							<img alt="" src="${ctx}/${goods.typeList[0].mainImgs[0]}">
+							<div>24张</div>
+						</div>
+						<div class="typeHeaderRight"><span style="color: #ff1e1e;font-size: 5vw;">￥9</span>&nbsp;起</div>
+					</div> 
+					<div class="typeCentent" id="typeCentent">
+						
+						<div class="swiper-container" id="banner2">
+							<div class="swiper-wrapper">
+								<#list goods.typeList as typeList>
+									<div class="swiper-slide" id="typeName">${typeList.typeName}<input type="hidden" value="${typeList.defaultPaper}">
+										<input type="hidden" value="${typeList.unitPrice}">
+										<input type="hidden" value="${typeList.defaultPrice}">
+										<input type="hidden" value="${typeList.typeId}">
+										<input type="hidden" value="${typeList.mainImg}"> 
+										<input type="hidden" value="${typeList.detailsImg}">
+									</div>
+								</#list>
+								
+								
+								
+							</div>
+						</div>
+						
+						
+						
+					</div>
+					<div class="typeBtn" id="typeBtn">确定</div>
+				</div>
+			</div>
+    		
+    	
+    	
+    	</div>
+    </div>
+</body>
+</html>
