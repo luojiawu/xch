@@ -13,7 +13,7 @@ import com.xch.dto.S_Order;
 
 public class OrderDao extends BaseDao{
 												  	
-	private static final String NAMESPACE_NAME = "com.pgy.mapper.MTemplateBookMapper.";
+	private static final String NAMESPACE_NAME = "com.xch.mapper.SOrderMapper.";
 	
 	public int count(Map<String,Object> params){
 		//创建数据库用户
@@ -35,7 +35,7 @@ public class OrderDao extends BaseDao{
 		o.setOrderStatus(1);
 		o.setName("11");
 		o.setPhone("1");
-		oDao.getPageOrder();
+		oDao.addOrder(o);
 		
 		
 	}
