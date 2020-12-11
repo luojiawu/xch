@@ -9,7 +9,7 @@
 	</settings>		
 	<typeAliases>
 		<!-- 给数据传输类起一个别名 (type:数据传输类 alias:别名) -->
-			/xch/src/com/xch/dto/S_Order.java
+			
 			<typeAlias type="com.xch.dto.S_Order" alias="s_order" />
 			<typeAlias type="com.xch.dto.S_User" alias="s_user" />
 			<typeAlias type="com.xch.dto.S_Site" alias="s_site" />
@@ -29,11 +29,11 @@
 				<!-- 连接数据库驱动 -->
 				<property name="driver" value="com.mysql.jdbc.Driver" />
 				<!-- 连接数据库URL-->		
-				<property name="url" value="jdbc:mysql://127.0.0.1:3306/photo_book?useUnicode=true&amp;characterEncoding=utf-8" />
+				<property name="url" value="jdbc:mysql://8.129.183.94:3306/xch?useUnicode=true&amp;characterEncoding=utf-8" />
 				<!-- 连接数据库用户名 ningguo-->
 				<property name="username" value="root" />
 				<!-- 连接数据库密码 -->
-				<property name="password" value="pugongying!@#" />
+				<property name="password" value="dd31fabc356be1b4" />
 				<!-- <property name="password" value="pugongying!@#" /> -->
 				<property name="poolPingEnabled" value="true"/>  
 				 
@@ -47,16 +47,8 @@
 
 	<!-- 配置xxxMapper.xml文件 -->
 	<mappers>				
-	<mapper resource="com/pgy/mapper/OrderMapper.xml" />
-	<mapper resource="com/pgy/mapper/TypeMapper.xml" />
-	<mapper resource="com/pgy/mapper/SiteMapper.xml" />
-	<mapper resource="com/pgy/mapper/UserMapper.xml" />
-	<mapper resource="com/pgy/mapper/PhotoMapper.xml" />		  
-	<mapper resource="com/pgy/mapper/PageMapper.xml" />			
-	<mapper resource="com/pgy/mapper/MOrderMapper.xml" />	
-	<mapper resource="com/pgy/mapper/MTemplateBookMapper.xml" />		  
-	<mapper resource="com/pgy/mapper/MTemplateMapper.xml" />
-	<mapper resource="com/pgy/mapper/PPositiveMapper.xml" />
+	<mapper resource="com/pgy/mapper/MTemplateBookMapper.xml" />
+	<mapper resource="com/xch/mapper/SOrderMapper.xml" />
 	</mappers>
 
 
