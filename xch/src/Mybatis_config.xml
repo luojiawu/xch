@@ -9,23 +9,11 @@
 	</settings>		
 	<typeAliases>
 		<!-- 给数据传输类起一个别名 (type:数据传输类 alias:别名) -->
-			<typeAlias type="com.pgy.dto.User" alias="user" />
-			<typeAlias type="com.pgy.dto.Photo" alias="photo" />
-			<typeAlias type="com.pgy.dto.Order" alias="order" />
-			<typeAlias type="com.pgy.dto.Goods" alias="goods" />
-			<typeAlias type="com.pgy.dto.Site" alias="site" />
-			<typeAlias type="com.pgy.dto.Type" alias="type" />	
-			
-			<typeAlias type="com.pgy.dto.Admin" alias="admin" />	
-			
-			<typeAlias type="com.pgy.dto.M_Book" alias="m_book" />	
-			<typeAlias type="com.pgy.dto.M_Order" alias="m_order" />	
-			<typeAlias type="com.pgy.dto.M_Template" alias="m_template" />	
-			<typeAlias type="com.pgy.dto.M_TemplateBook" alias="m_templateBook" />	
-			<typeAlias type="com.pgy.dto.P_User" alias="p_user" />
-			<typeAlias type="com.pgy.dto.P_Ana" alias="p_ana" />
-			<typeAlias type="com.pgy.dto.P_Template" alias="p_template" />
-			<typeAlias type="com.pgy.dto.P_ReadLog" alias="p_readLog" />
+			/xch/src/com/xch/dto/S_Order.java
+			<typeAlias type="com.xch.dto.S_Order" alias="s_order" />
+			<typeAlias type="com.xch.dto.S_User" alias="s_user" />
+			<typeAlias type="com.xch.dto.S_Site" alias="s_site" />
+			<typeAlias type="com.xch.dto.S_Server" alias="s_server" />
 	</typeAliases>
 	  
 	
