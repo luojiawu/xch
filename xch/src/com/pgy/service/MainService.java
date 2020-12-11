@@ -14,11 +14,11 @@ import com.pgy.dao.PhotoDao;
 import com.pgy.dao.SiteDao;
 import com.pgy.dao.TypeDao;
 import com.pgy.dao.UserDao;
-import com.pgy.dto.Goods;
-import com.pgy.dto.Order;
-import com.pgy.dto.Site;
-import com.pgy.dto.Type;
-import com.pgy.dto.User;
+import com.xch.dto.Goods;
+import com.xch.dto.Order;
+import com.xch.dto.Site;
+import com.xch.dto.Type;
+import com.xch.dto.User;
 
 public class MainService {
 	

@@ -14,12 +14,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.pgy.common.Util;
-import com.pgy.dto.Goods;
-import com.pgy.dto.Order;
-import com.pgy.dto.Site;
 import com.pgy.service.MainService;
 import com.pgy.service.PageService;
 import com.pgy.wxjssdk.WxJsSDK;
+import com.xch.dto.Goods;
+import com.xch.dto.Order;
+import com.xch.dto.Site;
 
 import net.sf.json.JSONObject;
 

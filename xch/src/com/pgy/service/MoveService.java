@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.pgy.dao.MOrderDao;
 import com.pgy.dao.MTemplateBookDao;
-import com.pgy.dto.M_Order;
-import com.pgy.dto.M_TemplateBook;
+import com.xch.dto.M_Order;
+import com.xch.dto.M_TemplateBook;
 
 public class MoveService {
 	

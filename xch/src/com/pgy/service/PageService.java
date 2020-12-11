@@ -8,9 +8,9 @@ import com.pgy.dao.GoodsDao;
 import com.pgy.dao.OrderDao;
 import com.pgy.dao.PhotoDao;
 import com.pgy.dao.TypeDao;
-import com.pgy.dto.Goods;
-import com.pgy.dto.Order;
-import com.pgy.dto.Type;
+import com.xch.dto.Goods;
+import com.xch.dto.Order;
+import com.xch.dto.Type;
 
 public class PageService {
 	

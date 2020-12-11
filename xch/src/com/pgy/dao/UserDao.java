@@ -2,8 +2,8 @@ package com.pgy.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pgy.dto.Admin;
-import com.pgy.dto.User;
+import com.xch.dto.Admin;
+import com.xch.dto.User;
 
 
 

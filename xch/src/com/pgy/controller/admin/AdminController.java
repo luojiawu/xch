@@ -26,12 +26,12 @@ import com.pgy.common.Util;
 import com.pgy.controller.customer.PageController;
 import com.pgy.dao.OrderDao;
 import com.pgy.dao.UserDao;
-import com.pgy.dto.Admin;
-import com.pgy.dto.Goods;
-import com.pgy.dto.Order;
-import com.pgy.dto.Site;
 import com.pgy.service.MainService;
 import com.pgy.service.PageService;
+import com.xch.dto.Admin;
+import com.xch.dto.Goods;
+import com.xch.dto.Order;
+import com.xch.dto.Site;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;

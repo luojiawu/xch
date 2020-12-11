@@ -7,7 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.pgy.common.Util;
-import com.pgy.dto.Admin;
+import com.xch.dto.Admin;
 
 /**
  * 登录检查拦截器

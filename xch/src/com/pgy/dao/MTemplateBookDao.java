@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pgy.dto.M_TemplateBook;
+import com.xch.dto.M_TemplateBook;
 
 public class MTemplateBookDao extends BaseDao{
 																 

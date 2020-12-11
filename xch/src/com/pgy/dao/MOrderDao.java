@@ -2,7 +2,7 @@ package com.pgy.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pgy.dto.M_Order;
+import com.xch.dto.M_Order;
 
 public class MOrderDao extends BaseDao{
 																 

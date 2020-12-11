@@ -2,7 +2,7 @@ package com.pgy.dao;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pgy.dto.Type;
+import com.xch.dto.Type;
 
 
 

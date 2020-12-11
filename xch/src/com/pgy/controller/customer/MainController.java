@@ -35,13 +35,13 @@ import org.springframework.web.multipart.MultipartFile;
 import com.pgy.common.FileToZip;
 import com.pgy.common.RecodeUtil;
 import com.pgy.common.Util;
-import com.pgy.dto.Site;
 import com.pgy.imageapi.Sample;
 import com.pgy.service.MainService;
 import com.pgy.wxjssdk.WxJsSDK;
 import com.pgy.wxpaysdk.WXPay;
 import com.pgy.wxpaysdk.WXPayConfigImpl;
 import com.pgy.wxpaysdk.WXPayConstants.SignType;
+import com.xch.dto.Site;
 import com.pgy.wxpaysdk.WXPayUtil;
 
 import net.sf.json.JSONObject;

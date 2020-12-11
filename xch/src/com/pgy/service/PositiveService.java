@@ -11,10 +11,10 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import com.pgy.dao.PPositiveDao;
-import com.pgy.dto.P_Ana;
-import com.pgy.dto.P_ReadLog;
-import com.pgy.dto.P_Template;
-import com.pgy.dto.P_User;
+import com.xch.dto.P_Ana;
+import com.xch.dto.P_ReadLog;
+import com.xch.dto.P_Template;
+import com.xch.dto.P_User;
 
 public class PositiveService {
 	

@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import com.pgy.dto.Goods;
-import com.pgy.dto.Type;
+import com.xch.dto.Goods;
+import com.xch.dto.Type;
 
 
 
