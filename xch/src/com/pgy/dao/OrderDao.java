@@ -7,13 +7,13 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 
 import com.pgy.common.Util;
-import com.xch.dto.Order;
+import com.xch.dto.S_Order;
 
 
 
 public class OrderDao extends BaseDao{
-	
-	private static final String NAMESPACE_NAME = "com.pgy.mapper.OrderMapper.";
+												  	
+	private static final String NAMESPACE_NAME = "com.pgy.mapper.MTemplateBookMapper.";
 	
 	public int count(Map<String,Object> params){
 		//创建数据库用户
@@ -23,7 +23,46 @@ public class OrderDao extends BaseDao{
 		return count;
 	}
 	
-	public List<Order> getPageOrder(Map<String,Object> params){
+	public static void main(String[] args) {
+		
+		OrderDao oDao = new OrderDao();
+		
+		S_Order o = new S_Order();
+		
+		o.setOrderId("11");
+		o.setServerId(1);
+		o.setBooking("11");
+		o.setOrderStatus(1);
+		o.setName("11");
+		o.setPhone("1");
+		oDao.getPageOrder();
+		
+		
+	}
+	
+	public List<S_Order> getPageOrder(){
+		//创建数据库用户
+		SqlSession session = getSqlSession();
+		List<S_Order> OrderList = session.selectList(NAMESPACE_NAME+"getMTemplateBookList");
+		closeSqlSession();
+		return OrderList;
+	}
+	
+	public int addOrder(S_Order order){
+		
+		SqlSession sqlSession = getSqlSession();
+		
+		int i = sqlSession.insert(NAMESPACE_NAME+"addSOrder", order);
+		
+		sqlSession.commit();
+		
+		closeSqlSession();
+		
+		return i;
+	}
+	
+	
+	/*public List<Order> getPageOrder(Map<String,Object> params){
 		//创建数据库用户
 		SqlSession session = getSqlSession();
 		List<Order> OrderList = session.selectList(NAMESPACE_NAME+"findByPage",params);
@@ -174,6 +213,6 @@ public class OrderDao extends BaseDao{
 		closeSqlSession();
 		
 		return i;
-	}
+	}*/
 	
 }
