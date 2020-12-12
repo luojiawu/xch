@@ -31,7 +31,7 @@
 		    orderStatus = #{orderStatus}
 	    </if>
 	    <if test="staffId !=null &amp;&amp; staffId !=''">
-		    staffId = #{staffId}
+		    and staffId = #{staffId}
 	    </if>
 	    
 		</where>
@@ -42,21 +42,21 @@
 	
 	<update id="updateSOrder">
 		
-		update xch_s_order set 
-		
-		<if test="money !=null &amp;&amp; money !=''">
-		    money = #{money},
-	    </if>
-	    <if test="orderStatus !=null &amp;&amp; orderStatus !=''">
-		    orderStatus = #{orderStatus},
-	    </if>
-	    <if test="endTime !=null &amp;&amp; endTime !=''">
-		    endTime = #{endTime},
-	    </if>
-	    <if test="staffId !=null &amp;&amp; staffId !=''">
-		    staffId = #{staffId}
-	    </if>
-	    
+		update xch_s_order
+		<set>
+			<if test="money !=null &amp;&amp; money !=''">
+			    money = #{money},
+		    </if>
+		    <if test="orderStatus !=null &amp;&amp; orderStatus !=''">
+			    orderStatus = #{orderStatus},
+		    </if>
+		    <if test="endTime !=null &amp;&amp; endTime !=''">
+			    endTime = #{endTime},
+		    </if>
+		    <if test="staffId !=null &amp;&amp; staffId !=''">
+			    staffId = #{staffId},
+		    </if>
+	    </set>
 		where orderId = #{orderId}
 		
 	</update>

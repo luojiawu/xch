@@ -2,7 +2,7 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.pgy.mapper.UserMapper">
+<mapper namespace="com.xch.mapper.SUserMapper">
 	
 	
 	<!-- <insert id="addAndReplaceUser">
@@ -30,7 +30,7 @@
 	
 	
 	<!-- 定义ResultMap -->
-	<resultMap id="userBaseResultMap" type="user" autoMapping="true"></resultMap>
-	<resultMap id="adminBaseResultMap" type="admin" autoMapping="true"></resultMap>
+	
+	<resultMap id="sUserBaseResultMap" type="s_user" autoMapping="true"></resultMap>
 	
 </mapper>

@@ -2,23 +2,39 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.pgy.mapper.TypeMapper">
+<mapper namespace="com.xch.mapper.SSiteMapper">
 	
 	
 	
 	
-	<select id="getTypeById" resultMap="typeBaseResultMap">
+	<select id="getSSiteByOpenId" resultMap="sSiteBaseResultMap">
 		
-		select * from p_type where typeId = #{typeId};
-		
+		select * from xch_s_site where openId = #{openId};
 		
 	</select>
 	
+	<insert id="addSSite">
+		insert into xch_s_site values
+		(#{openId},#{name},#{phone},#{siteDetails})  
+    	
+	</insert>
+	
+	<update id="updateSSite">
+		
+		update xch_s_site
+		<set>
+			
+			name = #{name},phone = #{phone},siteDetails = #{siteDetails}
+		    
+	    </set>
+		where openId = #{openId}
+		
+	</update>
 	
 	
 	
 	
 	<!-- 定义ResultMap -->
-	<resultMap id="typeBaseResultMap" type="type" autoMapping="true"></resultMap>
+	<resultMap id="sSiteBaseResultMap" type="s_site" autoMapping="true"></resultMap>
 	
 </mapper>

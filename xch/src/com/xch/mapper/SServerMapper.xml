@@ -2,47 +2,29 @@
 <!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-<mapper namespace="com.pgy.mapper.SiteMapper">
+<mapper namespace="com.xch.mapper.SServerMapper">
 	
-	<insert id="addAndReplaceSite" useGeneratedKeys="true" keyProperty="siteId" parameterType="com.pgy.dto.Site">
-		replace into p_site values (#{siteId},#{name},#{phone},#{site}); 
+	<insert id="addServer">
+		insert into xch_s_server values
+		(#{serverName},#{serverIconUrl})  
+    	
 	</insert>
 	
-	
-	<select id="getSiteBySiteId" resultMap="siteBaseResultMap">
+	<select id="getSServer" resultMap="sServerBaseResultMap">
 		
-		select * from p_site where siteId = #{siteIds}
-		
-	</select>
-	
-	<delete id="delSiteBySiteId">
-		delete from p_site where siteId = #{siteId};
-	</delete>
-	
-	<select id="getSiteBySiteIds" resultMap="siteBaseResultMap">
-		
-		select * from p_site where siteId in
-		<foreach collection="array" open="(" separator="," close=")" item="siteIds">
-            #{siteIds}
-    	</foreach>
-		
-		order by field(
-
-		siteId,
-
-		<foreach collection="array" separator="," item="siteIds">
-
-		#{siteIds}
-
-		</foreach>
-
-		)
-		
+		select * from xch_s_server where serverId = #{serverId};
 		
 	</select>
+	
+	<select id="getSServerList" resultMap="sServerBaseResultMap">
+		
+		select * from xch_s_server order by serverId desc;
+		 
+	</select>
+	
 	
 	
 	<!-- 定义ResultMap -->
-	<resultMap id="siteBaseResultMap" type="site" autoMapping="true"></resultMap>
+	<resultMap id="sServerBaseResultMap" type="s_server" autoMapping="true"></resultMap>
 	
 </mapper>
